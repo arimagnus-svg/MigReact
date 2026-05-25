@@ -1,0 +1,354 @@
+﻿@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/lib/js/popper.js/index.js"></script>
+
+    <script src="~/lib/appJS/SettlementVal.js"></script>
+
+    <script src="~/lib/angular-drag-and-drop-lists.js"></script>
+      
+
+}
+
+
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="e-commerce-products" class="page-layout carded full-width">
+
+            <div class="top-bg bg-primary"></div>
+
+            <!-- CONTENT -->
+            <div class="page-content" ng-app="SettlementApp" ng-controller="SettlementController" ng-init="LoadAddSettlement('@Html.Raw(ViewBag.Action)')">
+
+                <!-- HEADER -->
+                <div class="header bg-primary text-auto row no-gutters align-items-center justify-content-between">
+
+                    <!-- APP TITLE -->
+                    <div class="col-10 col-sm">
+
+                        <div class="logo row no-gutters align-items-start">
+                            <div class="logo-icon mr-3 mt-1">
+                                <i class="icon-cube-outline s-6"></i>
+                            </div>
+                            <div class="logo-text">
+                                <div class="h4">Final Settlement Processing</div>
+                                <div class=""></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- / APP TITLE -->
+
+
+                    <div class="col-2">
+
+
+                    </div>
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT -->
+                <div class="page-content">
+
+
+                    <div class="tab-content">
+
+
+
+
+                        <div class="row tab-pane fade show active">
+
+
+                            <div class="contacts-list card">
+
+
+                                <!-- USING THE GRID COMPLEX -->
+                                <div class="col-12">
+                                    <div class="example">
+                                        <div class="description">
+                                            <div class="description-text">
+                                                <div class="row no-gutters align-items-center justify-content-between">
+
+                                                    <div class="list-title text-muted">
+                                                        <div class="alert alert-warning alert-dismissible fade show"
+                                                             role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            You can process Final settlement for any employee by <strong>selecting employe from one list to another</strong> using arrow button and fill the details..
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="toggle-source-preview">
+
+                                            </div>
+                                        </div>
+                                        <div class="source-preview-wrapper">
+                                            <div class="preview">
+                                                <div class="preview-elements">
+                                                    <div class="container">
+                                                        <form>
+
+                                                            <div class="row">
+
+                                                                <div class="form-group col-md-8">
+                                                                    <div class="row p-xl-1" ng-if="msg!=''">
+
+                                                                        <div class="preview">
+                                                                            <div class="preview-elements">
+                                                                                <div class="alert alert-warning alert-dismissible fade show"
+                                                                                     role="alert">
+                                                                                    <button type="button" class="close" data-dismiss="alert"
+                                                                                            aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                    <strong>{{msg}}</strong>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="form-group col-md-5">
+                                                                    <label class="col-form-label">
+                                                                        All Employees
+                                                                    </label>
+                                                                    <select size="10" multiple ng-model="available" ng-options="EmployeeModel as EmployeeModel.employeeName for EmployeeModel in employeeList" style="width: 100%"></select>
+
+                                                                </div>
+                                                                <div class="form-group col-md-2">
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">Action<br /></div>
+                                                                        <div class="form-group col-md-12">
+                                                                            <i class="icon icon-chevron-right text-blue " id="moveright" type="button" value="Add" ng-click="moveItem(available[0], employeeList,selectedclients)"></i>
+                                                                        </div>
+                                                                        <div class="form-group col-md-12">
+                                                                            <i class="icon  icon-chevron-left text-brown" id="move left" type="button" value="Remove" ng-click="moveItem(selected[0], selectedclients,employeeList)"></i>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="form-group col-md-5">
+                                                                    <label class="col-form-label">Selected Employee</label>
+                                                                    <select size="10" multiple ng-model="selected" ng-options="client as client.employeeName for client in selectedclients" style="width: 100%"></select>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="alert alert-info form-group col-md-12">
+                                                                    Resignation details willl be blank if you select active/unresigned employees from above list.
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">Resignation Date</label>
+                                                                    <input type="text" readonly class="form-control" name="SettlementModel.resignationDate" ng-model="selectedclients[0].dor">
+
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">LWD</label>
+
+
+                                                                    <input type="text" readonly class="form-control" name="SettlementModel.LWD" ng-model="SettlementModel.lwd" ng-value="SettlementModel.lwd=(selectedclients[0].lwd)">
+                                                                    <input type="hidden" name="EmployeeModel" ng-model="SettlementModel.EmployeeID">
+
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">Settlement Date</label>
+
+
+                                                                    <input type="date" date="DD-MM-YYYY" class="form-control" name="SettlementModel" ng-model="SettlementModel.settlementDate">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">NoticePeriod</label>
+                                                                    <input type="text" class="form-control" name="SettlementModel.NoticePeriod" ng-model="SettlementModel.noticePeriod">
+
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">Days Served</label>
+
+
+                                                                    <input type="text" class="form-control" name="SettlementModel.DaysServed" ng-model="SettlementModel.daysServed" ng-value="SettlementModel.daysServed=(selectedclients[0].daysServed)">
+
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">ExcessNoticeDays</label>
+
+                                                                    <input type="text" class="form-control" name="SettlementModel.ExcessNoticeDay" ng-model="SettlementModel.excessNoticeDay" ng-value="SettlementModel.excessNoticeDay=(SettlementModel.noticePeriod-selectedclients[0].daysServed)">
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row" ng-repeat="LeaveModels in leaveListModel| filter:{employeeID:selectedclients[0].employeeID}" ng-if="selectedclients.length>0">
+                                                                <div class="form-group col-md-3">
+                                                                    <label class="col-form-label">TotalLeaveEncash</label>
+
+                                                                    <input type="text" class="form-control" name="SettlementModel.totalLeaveEncash" ng-model="SettlementModel.totalLeaveEncash" ng-init="SettlementModel.totalLeaveEncash=((LeaveModels.totalEarnedLeave +LeaveModels.carryForwardLeaves) - LeaveModels.totalLeaves)">
+
+                                                                </div>
+                                                                <div class="form-group col-md-7">
+
+
+
+                                                                    <div class="source-preview-wrapper ">
+                                                                        <div class="preview">
+                                                                            <div class="preview-elements">
+                                                                                <div id="accordion" role="tablist">
+                                                                                    <div class="card">
+
+                                                                                        <div class="card-header bg-grey-200" role="tab" id="headingOne">
+                                                                                            <a data-toggle="collapse" href="#collapseleave"
+                                                                                               aria-expanded="true"
+                                                                                               aria-controls="collapseOne">
+                                                                                                <div class="col-6">Leave Details</div>
+                                                                                                <div class="col-3"></div>
+                                                                                                <div class="col-3">
+
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+
+                                                                                        <div id="collapseleave" class="collapse" role="tabpanel"
+                                                                                             aria-labelledby="headingOne"
+                                                                                             data-parent="#accordion">
+                                                                                            <div class="card-block">
+
+                                                                                                <div class="row bg-gray-light">
+                                                                                                    <div class="col-12"> &nbsp;</div>
+                                                                                                </div>
+                                                                                                <div class="row p-xl-1 div-border">
+
+                                                                                                    <div class="col-4">
+                                                                                                        Total Earned Leaves: {{ LeaveModels.totalEarnedLeave}}
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        Carry Forward Leaves :{{LeaveModels.carryForwardLeaves}}
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        Leave Taken : {{LeaveModels.totalLeaves}}
+                                                                                                    </div>
+
+                                                                                                </div>
+
+                                                                                                <div class="row p-xl-1 div-border bg-grey-200">
+
+                                                                                                    <div class="col-4">
+                                                                                                        SNO
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        MONTH
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        Leaves
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                                <div class="row p-xl-1 div-border " ng-repeat="LeaveModel in LeaveModels.leaveList">
+
+                                                                                                    <div class="col-4">
+                                                                                                        {{index}}
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        {{LeaveModel.months}}
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        <input type="number" readonly name="LeaveModel.leaveCount" ng-model="LeaveModel.leaveCount" class="form-control col-md-6">
+                                                                                                        <input type="hidden" name="LeaveModel.totalLeave" ng-model="LeaveModel.totalLeave" class="form-control col-md-6">
+                                                                                                    </div>
+                                                                                                </div>
+
+
+
+
+
+
+                                                                                            </div> <!-- card block-->
+                                                                                        </div> <!-- collapse-->
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- source-preview-wrapper end here-->
+
+
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">Leaving Reason</label>
+                                                                    <input type="text" class="form-control" name="SettlementModel.LeavingReason" ng-model="SettlementModel.leavingReason">
+
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">Comments</label>
+
+
+                                                                    <input type="text" class="form-control" name="SettlementModel.Comments" ng-model="SettlementModel.comments">
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="form-group col-md-4">
+                                                                    <button type="button" class="btn btn-outline-primary" aria-label="Product details" ng-click="SaveSettlement(SettlementModel,selectedclients)">
+                                                                        Save Settlement
+                                                                    </button>
+
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- USING THE GRID COMPLEX -->
+
+
+                            </div>
+
+
+                            <!-- / SUB CONTENT -->
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- / CONTENT -->
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

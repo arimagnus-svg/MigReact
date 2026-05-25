@@ -1,0 +1,527 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+    <script src="~/lib/appJS/HomeVal.js"></script>
+
+
+}
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="server-dashboard" class="page-layout simple full-width" ng-app="HomeApp" data-ng-controller="HomeController" ng-init="LoadSummary()">
+
+            <!-- CONTENT -->
+            <div class="page-content p-6">
+
+                <!-- WIDGET GROUP -->
+                <div class="widget-group row">
+
+
+                    <!-- WIDGET 2 -->
+                    <div class="col-12 col-sm-6 col-xl-3 p-3">
+
+                        <div class="widget widget0 card bg-pink-400 text-auto">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+
+                                    <div class="row no-gutters align-items-center">
+                                        <i class="icon-harddisk mr-2"></i>
+                                        <span class="h6">Payroll  </span>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+
+                            </div>
+
+
+
+                            <div class="widget-footer p-4 text-yellow-300">
+                                Last Generated on : {{SalarySummaryList.lastSalaryDate}}
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 2 -->
+                    <!-- WIDGET 3 -->
+                    <div class="col-12 col-sm-6 col-xl-3 p-3">
+
+                        <div class="widget widget0 card bg-blue text-auto">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+
+                                    <div class="row no-gutters align-items-center">
+
+                                        <i class="icon-server-network mr-2"></i>
+                                        <span class="h6">Settlement Status </span>
+
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+
+
+                            </div>
+                            <div class="widget-footer p-4 text-muted">
+                                <a href="/Report/SettlementReport" class="text-indigo">  Total Pending:  {{SalarySummaryList.settlementPendingCount}}</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 3 -->
+                    <!-- WIDGET 4 -->
+                    <div class="col-12 col-sm-6 col-xl-3 p-3">
+
+                        <div class="widget widget0 card bg-teal-400 text-auto">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <div class="row no-gutters align-items-center">
+                                        <i class="icon-stop-circle mr-2"></i>
+                                        <span class="h6"> Stop Salary </span>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+                            </div>
+
+                            <div class="widget-footer p-4 text-muted">
+                                Total Pending:  {{SalarySummaryList.stopPaymentCount }}
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 4 -->
+                    <!-- WIDGET 5 -->
+                    <div class="col-12 col-sm-6 col-xl-3 p-3">
+
+                        <div class="widget widget0 card bg-indigo-400 text-auto">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+
+                                    <div class="row no-gutters align-items-center">
+                                        <i class="icon-library-books mr-2"></i>
+                                        <span class="h6">Reimbursement requests</span>
+
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+
+                            </div>
+
+
+
+                            <div class="widget-footer p-4 text-muted">
+                                Total Pending:   {{SalarySummaryList.reimburseCount}}
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 5 -->
+
+                    <!-- WIDGET 8 -->
+                    <div class="col-12 col-sm-6 col-xl-8 p-3">
+
+                        <div class="widget widget6 card">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <span class="h6 font-weight-bold">Last Payout Details</span>
+                                    <span class="ml-3 badge badge-primary"></span>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+                            </div>
+
+                            <div class="widget-content p-4" ng-if="SalaryAggList.length>0" ng-repeat="ProfileAggSalaryModel in SalaryAggList">
+
+                                <div class="row p-4 align-items-center">
+
+                                    <div class="col-auto text-bold">Process Month</div>
+                                    <div class="col-auto">
+                                        {{ProfileAggSalaryModel.processMonth}}
+                                    </div> 
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.recordFound==1">
+                                       
+                                    </div>
+                                    <div class="col-auto font-weight-500 text-muted" ng-if="ProfileAggSalaryModel.recordFound==1"> </div>
+                                </div>
+
+                                 
+
+                                <div class="row p-4 align-items-center" ng-if="ProfileAggSalaryModel.recordFound==1">
+
+                                    <div class="col-auto" >
+                                        Total Salary
+                                    </div>
+
+                                    <div class="col text-bold" >
+                                     
+                                        {{ProfileAggSalaryModel.totalSalary}}
+                                    </div>
+                                    <div class="col-auto">
+                                        Working Days
+                                    </div>
+                                    <div class="col-auto font-weight-500 text-muted">
+                                        {{ProfileAggSalaryModel.workingDay}}
+
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row p-4 align-items-center" ng-if="ProfileAggSalaryModel.recordFound==1">
+
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue1>0">
+                                        {{ProfileAggSalaryModel.group1}}
+                                    </div>
+
+                                    <div class="col text-bold" ng-if="ProfileAggSalaryModel.groupValue1>0">
+                                        {{ProfileAggSalaryModel.groupValue1}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+
+                                    </div>
+                                    <div class="col-auto">
+                                        Employee Count
+                                    </div>
+                                    <div class="col-auto font-weight-500 text-muted">{{ProfileAggSalaryModel.employeeCount}}</div>
+                                </div>
+
+                                 
+                                <div class="row p-4 align-items-center" ng-if="ProfileAggSalaryModel.recordFound==1">
+
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue2>0">
+                                        {{ProfileAggSalaryModel.group2}}
+                                    </div>
+
+                                    <div class="col text-bold" ng-if="ProfileAggSalaryModel.groupValue2>0">
+                                        {{ProfileAggSalaryModel.groupValue2}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+
+                                    </div>
+                                    <div class="col-auto">
+                                        Resignation #
+                                    </div>
+                                    <div class="col-auto font-weight-500 text-muted">{{ProfileAggSalaryModel.employeeResignCount}}</div>
+                                </div>
+                                
+
+                                <div class="row p-4 align-items-center" ng-if="(ProfileAggSalaryModel.groupValue3>0 || ProfileAggSalaryModel.groupValue4>0) && ProfileAggSalaryModel.recordFound==1">
+
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue3>0">
+                                        {{ProfileAggSalaryModel.group3}}
+                                    </div>
+
+                                    <div class="col text-bold" ng-if="ProfileAggSalaryModel.groupValue3>0">
+                                        {{ProfileAggSalaryModel.groupValue3}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+                                    </div>
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue4>0">
+                                        {{ProfileAggSalaryModel.group4}}
+                                    </div>
+                                    <div class="col-auto font-weight-500 text-muted" ng-if="ProfileAggSalaryModel.groupValue4>0">
+
+                                        {{ProfileAggSalaryModel.groupValue4}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row p-4 align-items-center" ng-if="(ProfileAggSalaryModel.groupValue5>0 || ProfileAggSalaryModel.groupValue6>0) && ProfileAggSalaryModel.recordFound==1">
+
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue5>0">
+                                        {{ProfileAggSalaryModel.group5}}
+                                    </div>
+
+                                    <div class="col text-bold" ng-if="ProfileAggSalaryModel.groupValue5>0">
+                                        {{ProfileAggSalaryModel.groupValue5}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+                                    </div>
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue6>0">
+                                        {{ProfileAggSalaryModel.group6}}
+                                    </div>
+                                    <div class="col-auto font-weight-500 text-muted" ng-if="ProfileAggSalaryModel.groupValue6>0">
+
+                                        {{ProfileAggSalaryModel.groupValue6}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row p-4 align-items-center" ng-if="(ProfileAggSalaryModel.groupValue7>0 || ProfileAggSalaryModel.groupValue8>0) && ProfileAggSalaryModel.recordFound==1">
+
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue7>0">
+                                        {{ProfileAggSalaryModel.group7}}
+                                    </div>
+
+                                    <div class="col text-bold" ng-if="ProfileAggSalaryModel.groupValue7>0">
+                                        {{ProfileAggSalaryModel.groupValue7}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+                                    </div>
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue8>0">
+                                        {{ProfileAggSalaryModel.group8}}
+                                    </div>
+                                    <div class="col-auto font-weight-500 text-muted" ng-if="ProfileAggSalaryModel.groupValue8>0">
+
+                                        {{ProfileAggSalaryModel.groupValue8}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row p-4 align-items-center" ng-if="(ProfileAggSalaryModel.groupValue9>0 || ProfileAggSalaryModel.groupValue10>0) && ProfileAggSalaryModel.recordFound==1">
+
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue9>0">
+                                        {{ProfileAggSalaryModel.group9}}
+                                    </div>
+
+                                    <div class="col text-bold" ng-if="ProfileAggSalaryModel.groupValue9>0">
+                                        {{ProfileAggSalaryModel.groupValue9}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+                                    </div>
+                                    <div class="col-auto" ng-if="ProfileAggSalaryModel.groupValue10>0">
+                                        {{ProfileAggSalaryModel.group10}}
+                                    </div>
+                                    <div class="col-auto font-weight-500 text-muted" ng-if="ProfileAggSalaryModel.groupValue10>0">
+
+                                        {{ProfileAggSalaryModel.groupValue10}}
+                                        <a data-ng-href="@Url.Action("SalaryProcessedDetails", "SalaryGenProcess")?month={{ProfileAggSalaryModel.processMonth}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / WIDGET 8 -->
+
+
+                    <!-- WIDGET 6 -->
+                    
+                    <!-- / WIDGET 6 -->
+                    <!-- WIDGET 8 -->
+                    <div class="col-12 col-lg-4 p-3">
+
+                        <div class="widget widget8 card">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <span class="h6 font-weight-bold">Employee Statistics</span>
+                                    <span class="ml-3 badge badge-primary"></span>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+                            </div>
+
+                            <div class="widget-content p-4">
+
+                                <div class="row p-4 align-items-center">
+
+                                    <div class="col-auto">
+                                        <i class="icon icon-people text-red "></i>
+                                    </div>
+
+                                    <div class="col text-bold">Total Employees</div>
+
+                                    <div class="col-auto font-weight-500 text-muted">{{SalarySummaryList.employeeCount}}</div>
+                                </div>
+
+                                <div class="row p-4 align-items-center">
+
+                                    <div class="col-auto">
+                                        <i class="icon icon-people text-red "></i>
+                                    </div>
+
+                                    <div class="col text-bold">Employees Resigned </div>
+
+                                    <div class="col-auto font-weight-500 text-muted">{{SalarySummaryList.employeeResignCount }}</div>
+                                </div>
+
+                                <div class="row p-4 align-items-center">
+
+                                    <div class="col-auto">
+                                        <i class="icon  icon-arrow-up text-green"></i>
+                                    </div>
+
+                                    <div class="col text-bold">Salary Releaseed</div>
+
+                                    <div class="col-auto font-weight-500 text-muted">{{SalarySummaryList.salaryReleasedCount}}</div>
+                                </div>
+
+                                <div class="row p-4 align-items-center">
+
+                                    <div class="col-auto">
+                                        &nbsp;
+                                    </div>
+
+                                    <div class="col text-bold"></div>
+
+                                    <div class="col-auto font-weight-500 text-muted"></div>
+                                </div>
+
+                                <div class="row p-4 align-items-center">
+
+                                    <div class="col-auto"> &nbsp;
+                                    </div>
+
+                                    <div class="col text-bold"></div>
+
+                                    <div class="col-auto font-weight-500 text-muted"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / WIDGET 8 -->
+
+                    <!-- WIDGET 7 -->
+                    <div class="col-12 col-lg-12 p-3">
+
+                        <div class="widget widget7 card">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <span class="h6">Investments declaration vs Actual </span>
+                                    <span class="ml-3 badge bg-pink text-auto">actual updated before cutoff date/</span>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+
+                            </div>
+
+                            <div class="widget-content p-4">
+
+                                <table id="widget7-table" class="table">
+
+                                    <thead>
+                                        <tr>
+
+                                            <th class="">
+                                                <div class="table-header">
+                                                    <span class="column-title">Total Employee Declared</span>
+                                                </div>
+                                            </th>
+
+                                            <th class="">
+                                                <div class="table-header">
+                                                    <span class="column-title">Delcaration pending</span>
+                                                </div>
+                                            </th>
+
+                                            <th class="">
+                                                <div class="table-header">
+                                                    <span class="column-title">Actual Proof Submitted</span>
+                                                </div>
+                                            </th>
+
+                                            <th class="">
+                                                <div class="table-header">
+                                                    <span class="column-title">Actual Proof Submission pending</span>
+                                                </div>
+                                            </th>
+
+
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr>
+
+                                            <td >
+                                                <span class="font-weight-bold">
+                                                    {{SalarySummaryList.investDeclareCount}}
+                                                </span>
+                                            </td>
+
+                                            <td >
+                                                <span class="badge bg-green text-white">
+                                                    {{SalarySummaryList.employeeCount -SalarySummaryList.investDeclareCount}}
+
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="badge bg-green text-white">
+                                                    {{SalarySummaryList.investProofSubmitCount}}
+
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-green text-white">
+                                                    {{SalarySummaryList.investProofPendingCount}}
+
+                                                </span>
+                                            </td>
+
+
+
+                                        </tr>
+                                         
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / WIDGET 7 -->
+
+                </div>
+                <!-- / WIDGET GROUP -->
+            </div>
+            <!-- / CONTENT -->
+        </div>
+
+        <script type="text/javascript" src="../assets/js/apps/dashboard/server.js"></script>
+    </div>
+
+</div>           

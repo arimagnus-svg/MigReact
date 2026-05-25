@@ -1,0 +1,139 @@
+﻿@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+
+    <script src="~/lib/appJS/ConfigSetupVal.js"></script>
+}
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="e-commerce-products" class="page-layout carded full-width">
+
+            <div class="top-bg bg-primary"></div>
+
+            <!-- CONTENT -->
+            <div class="page-content" ng-app="UserAppConfig">
+
+                <!-- HEADER -->
+                <div class="header bg-primary text-auto row no-gutters align-items-center justify-content-between">
+
+                    <!-- APP TITLE -->
+                    <div class="col-12 col-sm">
+
+                        <div class="logo row no-gutters align-items-start">
+                            <div class="logo-icon mr-3 mt-1">
+                                <i class="icon-settings s-6"></i>
+                            </div>
+                            <div class="logo-text">
+                                <div class="h4">Edit Section Details </div>
+                                <div class=""></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- / APP TITLE -->
+
+
+                    <div class="col-auto">
+                    </div>
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT -->
+
+                
+
+
+
+                <div class="tab-content" ng-controller="UserAppConfigController" ng-init="EditGroupNodeSetup('@Html.Raw(ViewBag.Action)')" />
+                    <div class="row tab-pane fade show active">
+
+                        <div class="card p-6">
+
+                            <form>
+                                <div class="input-group mb-8">
+                                    <div class="col-6">
+                                        <div class="form-group ">
+                                            <label>Param Type</label>
+                                            <input type="text" class="form-control col-md-6" name="userConfigModel" ng-model="userConfigModel.paramType">
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Effective Date</label>
+                                            <input type="date" class="form-control col-md-6" name="userConfigModel" ng-model="userConfigModel.effectiveDate">
+                                            <input type="hidden" class="form-control" name="userConfigModel" ng-model="userConfigModel.groupNodeID">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-8">
+                                    <div class="col-6">
+                                        <div class="form-group ">
+                                            <label>Param Name</label>
+                                            <input type="text" class="form-control" name="userConfigModel" ng-model="userConfigModel.groupNodeName">
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Group Node Relation</label>
+                                            <input type="text" class="form-control" name="userConfigModel" ng-model="userConfigModel.nodeIDstring">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+   
+
+                                <div class="input-group mb-8">
+                                    <div class="col-5">
+
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light" ng-click="SaveGroupNodeSetup(userConfigModel)">Submit</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+                        </div>
+
+                        <div class="row p-xl-1" ng-if="msg!=''">
+
+                            <div class="preview">
+                                <div class="preview-elements">
+                                    <div class="alert alert-warning alert-dismissible fade show"
+                                         role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>{{msg}}</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!-- / SUB CONTENT -->
+            </div>
+    </div>
+    <!-- / CONTENT -->
+</div>
+
+ 

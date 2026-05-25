@@ -1,0 +1,44 @@
+﻿@model ArimagnusPayrollServ.Models.SendCodeViewModel
+@{
+    ViewBag.Title = "OTP Page";
+}
+ 
+
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="login" class="p-8">
+
+
+            <div class="form-wrapper md-elevation-8 p-8">
+
+
+                <div class="title h5">Forgot Password</div>
+
+                <div class="description mt-2"></div>
+
+                @using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post ))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("rememberMe", @Model.RememberMe)
+                    <h4>Send verification code</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-8">
+                            Select Two-Factor Authentication Provider:
+                           
+                            <input type="submit" value="Submit" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+                <div class="separator">
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

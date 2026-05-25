@@ -1,0 +1,123 @@
+﻿@model ArimagnusPayrollServ.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Account Registration";
+}
+
+  
+
+<div class="content-wrapper">
+
+    <div class="content">
+         
+        <div class="content">
+            
+
+            <div id="login" class="p-8 col-md-12" >
+
+
+
+                <div class="form-wrapper md-elevation-8 p-8 card">
+
+                    <div class="title h5">Register an account</div>
+
+                    <div class="description mt-2"></div>
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post ))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-form-label text-sm-right pr-0">
+                                @Html.LabelFor(m => m.FirstName, new { @class = "mb-0" })
+
+                            </div>
+
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control col-sm-10 col-md-10" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-form-label text-sm-right pr-0">
+                                @Html.LabelFor(m => m.LastName, new { @class = "mb-0" })
+
+                            </div>
+
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control col-sm-10 col-md-10" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-form-label text-sm-right pr-0">
+                                @Html.LabelFor(m => m.Email, new { @class = "mb-0" })
+
+                            </div>
+
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-sm-10 col-md-10" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-form-label text-sm-right pr-0">
+                                @Html.LabelFor(m => m.Phone, new { @class = "mb-0" })
+
+                            </div>
+
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control col-sm-10 col-md-6" })
+
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-form-label text-sm-right pr-0">
+                                @Html.LabelFor(m => m.Password, new { @class = "mb-0" })
+
+                            </div>
+
+                            <div class="col-sm-9">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control col-sm-10 col-md-6" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-form-label text-sm-right pr-0">
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "mb-0" })
+
+                            </div>
+
+                            <div class="col-sm-9">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control col-sm-10 col-md-6" })
+
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="form-group has-feedback">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-default" value="Register" />
+                            </div>
+                        </div>
+                    }
+
+                    <div class="separator">
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+ 
+    </div>
+</div>
+

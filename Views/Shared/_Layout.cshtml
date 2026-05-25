@@ -1,0 +1,153 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title</title>
+
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-store" />
+    <meta http-equiv="expires" content="-1" />
+    <meta http-equiv="pragma" content="no-cache" />
+ 
+    <!-- STYLESHEETS -->
+    <style type="text/css">
+        [fuse-cloak],
+        .fuse-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Icons.css -->
+    <link type="text/css" rel="stylesheet" href="~/css/style.css">
+
+    <!-- Animate.css -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/animate.css/animate.min.css">
+
+    <!-- PNotify -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/pnotify/pnotify.custom.min.css">
+
+    <!-- Nvd3 - D3 Charts -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/nvd3/build/nv.d3.min.css" />
+
+    <!-- Perfect Scrollbar -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+
+    <!-- Fuse Html -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/fuse-html/fuse-html.min.css" />
+
+    <!-- Main CSS -->
+    <link type="text/css" rel="stylesheet" href="~/css/main.css">
+    <!-- / STYLESHEETS -->
+    <!-- JAVASCRIPT -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="~/lib/js/jquery/dist/jquery.min.js"></script>
+
+    <!-- Mobile Detect -->
+    <script type="text/javascript" src="~/lib/js/mobile-detect/mobile-detect.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script type="text/javascript"
+            src="~/lib/js/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+
+    <!-- Popper.js -->
+    <script type="text/javascript" src="~/lib/js/popper.js/index.js"></script>
+
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="~/lib/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Nvd3 - D3 Charts -->
+    <script type="text/javascript" src="~/lib/js/d3/d3.min.js"></script>
+    <script type="text/javascript" src="~/lib/js/nvd3/build/nv.d3.min.js"></script>
+
+    <!-- Data tables -->
+    <script type="text/javascript" src="~/lib/js/datatables.net/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript"
+            src="~/lib/js/datatables-responsive/js/dataTables.responsive.js"></script>
+
+    <!-- PNotify -->
+    <script type="text/javascript" src="~/lib/js/pnotify/pnotify.custom.min.js"></script>
+
+    <!-- Fuse Html -->
+    <script type="text/javascript" src="~/lib/js/fuse-html/fuse-html.min.js"></script>
+
+    <!-- Main JS -->
+    <script type="text/javascript" src="~/lib/js/main.js"></script>
+
+    <!-- / JAVASCRIPT -->
+</head>
+
+<body class="layout layout-vertical layout-left-navigation layout-above-toolbar">
+
+    <nav id="toolbar" class="fixed-top bg-white">
+
+        <div class="row no-gutters align-items-center flex-nowrap">
+
+            <div class="col">
+
+                <div class="row no-gutters align-items-center flex-nowrap d-print-none">
+
+                    <button type="button" class="toggle-aside-button btn btn-icon d-block d-lg-none"
+                            data-fuse-bar-toggle="aside">
+                        <i class="icon icon-menu"></i>
+                    </button>
+
+                    <div class="toolbar-separator d-block d-lg-none"></div>
+
+                    <div class="shortcuts-wrapper row no-gutters align-items-center px-0 px-sm-2">
+
+                        <div class="shortcuts row no-gutters align-items-center d-none d-md-flex">
+                        </div>
+                        <div class="add-shortcut-menu-button dropdown px-1 px-sm-3">
+
+                            <img alt="Logo" src="~/img/Arimagnus_Logo.png">
+                        </div>
+
+ 
+                    </div>
+
+                    <div class="toolbar-separator"></div>
+
+                </div>
+            </div>
+
+            <div class="col-auto">
+
+                <div class="row no-gutters align-items-center justify-content-end d-print-none">
+                </div>
+                   
+            </div>
+        </div>
+    </nav>
+
+    <div id="wrapper">
+
+        
+
+         
+
+        @RenderBody()
+
+
+         
+
+ 
+    </div>
+
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+
+</html>
+
+
+

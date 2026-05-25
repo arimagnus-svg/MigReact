@@ -1,0 +1,71 @@
+﻿@model ArimagnusPayrollServ.Models.ConfirmUserViewModel
+@{
+    ViewBag.Title = "Reset password";
+}
+
+ 
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="login" class="p-8">
+
+
+            <div class="form-wrapper md-elevation-8 p-8  ">
+
+
+                <div class="title h5">Account Activation</div>
+
+                <div class="description mt-2">
+                    <br />
+                    <p class="login-box-msg">You have successfully registered the Account.</p>
+                    <p class="text-left wow fadeInDown">
+                        Activation Code has been sent to your Email Account .<br /> Please check your mailbox and enter the OTP code to activate this Account.
+
+                        <!-- Please click the Activate button to activate this Account!!!. -->
+
+                    </p>
+
+                </div>
+                @using (Html.BeginForm("AccountActivation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post ))
+                {
+                    <br />
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = true })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserCode, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(m => m.UserCode, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.UserCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <input type="submit" value="Activate Now" class="btn btn-info" />
+
+                        </div>
+                    </div>
+
+                }
+
+
+                <div class="separator">
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

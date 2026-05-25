@@ -1,0 +1,389 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+    <script src="~/lib/appJS/HomeVal.js"></script>
+
+
+}
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="server-dashboard" class="page-layout simple full-width" ng-app="HomeApp" data-ng-controller="HomeController" ng-init="LoadSummary()">
+
+            <!-- CONTENT -->
+            <div class="page-content p-6">
+
+                <!-- WIDGET GROUP -->
+                <div class="widget-group row">
+
+
+                    <!-- WIDGET 2 -->
+                    <div class="col-12 col-sm-6 col-xl-3 p-3">
+
+                        <div class="widget widget0 card bg-pink-400 text-auto">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+
+                                    <div class="row no-gutters align-items-center">
+                                        <i class="icon-harddisk mr-2"></i>
+                                        <span class="h6">Investment Declared</span>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+
+                            </div>
+
+                            <div class="widget-footer p-4 text-muted">
+                                {{employeInvList.declareStatus}}
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 2 -->
+                    <!-- WIDGET 3 -->
+                    <div class="col-12 col-sm-6 col-xl-3 p-3">
+
+                        <div class="widget widget0 card bg-blue text-auto">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+
+                                    <div class="row no-gutters align-items-center">
+
+                                        <i class="icon-server-network mr-2"></i>
+                                        <span class="h6">Flexi Benefit Declared</span>
+
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+
+                            </div>
+
+                            <div class="widget-footer p-4 text-muted" ng-if="employeePayInvList.length>0">
+                                Yes
+                            </div>
+                            <div class="widget-footer p-4 text-muted" ng-if="employeePayInvList.length<1">
+                                No
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / WIDGET 3 -->
+                    <!-- WIDGET 4 -->
+                    <div class="col-12 col-sm-6 col-xl-3 p-3">
+
+                        <div class="widget widget0 card bg-teal-400 text-auto">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <div class="row no-gutters align-items-center">
+                                        <i class="icon-currency-inr mr-2"></i>
+                                        <span class="h6">Payroll  </span>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+                            </div>
+
+                            <div class="widget-footer p-4 text-muted">
+
+                                <span class="h6 text-red-900"> <a class="text-white" href="/SalaryGenProcess/ShowPayroll">View Last payslip </a></span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 4 -->
+                    <!-- WIDGET 5 -->
+                    <div class="col-12 col-sm-6 col-xl-3 p-3">
+
+                        <div class="widget widget0 card bg-indigo-400 text-auto">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+
+                                    <div class="row no-gutters align-items-center">
+                                        <i class="icon-library-books mr-2"></i>
+                                        <span class="h6">Reimbursement requests</span>
+
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+
+                            </div> 
+
+                            <div class="widget-footer p-4 text-muted" ng-if="employeePayInvList.length>0">
+                                Yes
+                            </div>
+                            <div class="widget-footer p-4 text-muted" ng-if="employeePayInvList.length<1">
+                                No
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 5 -->
+                    <!-- WIDGET 6 -->
+                    <div class="col-6 p-3">
+
+                        <div class="widget widget6 card">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <span class="h6 font-weight-bold">Announcement</span>
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn btn-icon">
+                                        <i class="icon icon-dots-vertical"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="widget-content p-4">
+                                <div id="widget6-main-chart">
+                                    <p> - Tax rate has revised from Septomber 2024 payroll.</p>
+                                    <p> - Reimbursement booking page will remain open from 05th to 29th of every month</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 6 -->
+                    <!-- WIDGET 6 -->
+                    <div class="col-6 p-3">
+
+                        <div class="widget widget6 card">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <span class="h6 font-weight-bold"> Important Documents</span>
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn btn-icon">
+                                        <i class="icon icon-dots-vertical"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="widget-content p-4">
+                                <div id="widget6-main-chart">
+                                    <p> - Payroll starter kit</p>
+                                    <p> - LTA Reimbursement policy</p>
+                                    <p> - Telephone Expense Reimbursement policy</p>
+                                    <p> - Tax Proof user Manual</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 6 -->
+                    <!-- WIDGET 7 -->
+                    <div class="col-6 p-3">
+
+                        <div class="widget widget6 card">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <span class="h6 font-weight-bold">Tax Declaration</span>
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn btn-icon">
+                                        <i class="icon icon-dots-vertical"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="widget-content p-4">
+                                <div id="widget6-main-chart">
+                                    <table id="widget7-table" class="table">
+
+                                        <thead>
+                                            <tr>
+
+                                                <th class="">
+                                                    <div class="table-header">
+                                                        <span class="column-title">80CC</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="">
+                                                    <div class="table-header">
+                                                        <span class="column-title">HRA</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Medical</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Others</span>
+                                                    </div>
+                                                </th>
+
+
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr>
+
+                                                <td>
+                                                    <span class="font-weight-bold">
+                                                        {{employeInvList.emp_80CC}}
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <span class="badge bg-green text-white">
+                                                        {{employeInvList.hra}}
+
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <span class="badge bg-green text-white">
+                                                        {{employeInvList.via}}
+
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-green text-white">
+                                                        {{employeInvList.others}}
+
+                                                    </span>
+                                                </td>
+
+
+
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / WIDGET 7 -->
+                    <!-- WIDGET 8 -->
+                    <div class="col-6 p-3">
+
+
+                        <div class="widget widget8 card">
+
+                            <div class="widget-header pl-4 pr-2 row no-gutters align-items-center justify-content-between">
+
+                                <div class="col">
+                                    <span class="h6 font-weight-bold">Reimbursement Claim Details</span>
+                                    <span class="ml-3 badge badge-primary"></span>
+                                </div>
+
+                                <button type="button" class="btn btn-icon">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </button>
+                            </div>
+
+                            <div class="widget-content p-4">
+
+                                <div class="row p-4 align-items-center">
+
+                                    
+
+                                    <div class="col text-bold col-3">
+                                        <span class="column-title">Benefit Name</span>
+                                    </div>
+                                    <div class="col text-bold col-2">
+                                        <span class="column-title">Total Amount</span>
+                                    </div>
+                                    <div class="col text-bold col-2">
+                                        <span class="column-title">Reimbursed Amount</span>
+                                    </div>
+                                    <div class="col text-bold col-2">
+                                        <span class="column-title">Balance Amount</span>
+                                    </div>
+                                    <div class="col text-bold col-3">
+                                        <span class="column-title">Last Submitted Date</span>
+                                    </div>
+                                </div>
+
+                                <div class="row p-4 align-items-center" ng-repeat="EmpPayInvSummaryModel in employeePayInvList">
+
+                                     
+                                    <div class="col text-bold col-3">
+                                        <span class="column-title">{{EmpPayInvSummaryModel.benefitName}}</span>
+                                    </div>
+                                    <div class="col text-bold col-2">
+                                        <span class="column-title">{{EmpPayInvSummaryModel.flexiApproved}}</span>
+                                    </div>
+                                    <div class="col text-bold col-2">
+                                        <span class="column-title">
+                                            {{EmpPayInvSummaryModel.reimbusredAmount}}
+                                        </span>
+                                    </div>
+                                    <div class="col text-bold col-2">
+                                        <span class="column-title"> {{EmpPayInvSummaryModel.flexiApproved -SalarySummaryList.reimbusredAmount}}</span>
+                                    </div>
+                                    <div class="col text-bold col-3">
+                                        <span class="column-title"> {{EmpPayInvSummaryModel.lastReimbusreDate}}</span>
+                                    </div>
+
+                                </div>
+ 
+
+
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+                     <!-- / WIDGET 8 -->
+                </div>
+                <!-- / WIDGET GROUP -->
+            </div>
+            <!-- / CONTENT -->
+        </div>
+
+        <script type="text/javascript" src="../lib/js/apps/dashboard/server.js"></script>
+    </div>
+
+</div>

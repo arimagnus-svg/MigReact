@@ -1,0 +1,616 @@
+﻿@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/lib/js/popper.js/index.js"></script>
+
+    <script src="~/lib/appJS/AppSettingsVal.js"></script>
+
+    <script src="~/lib/angular-drag-and-drop-lists.js"></script>
+      
+
+}
+
+
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="e-commerce-products" class="page-layout carded full-width">
+
+            <div class="top-bg bg-primary"></div>
+
+            <!-- CONTENT -->
+            <div class="page-content" ng-app="AppSettingsApp" ng-controller="AppSettingsController" ng-init="LoadAppSettings()">
+
+                <!-- HEADER -->
+                <div class="header bg-primary text-auto row no-gutters align-items-center justify-content-between">
+
+                    <!-- APP TITLE -->
+                    <div class="col-10 col-sm">
+
+                        <div class="logo row no-gutters align-items-start">
+                            <div class="logo-icon mr-3 mt-1">
+                                <i class="icon s-4 icon-settings s-6"></i>
+                            </div>
+                            <div class="logo-text">
+                                <div class="h4">Application Settings</div>
+                                <div class=""></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- / APP TITLE -->
+
+
+                    <div class="col-2">
+
+
+                    </div>
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT -->
+                <div class="page-content">
+
+
+                    <div class="tab-content">
+
+
+
+
+                        <div class="row tab-pane fade show active">
+
+
+                            <div class="contacts-list card">
+
+
+                                <!-- USING THE GRID COMPLEX -->
+                                <div class="col-12">
+                                    <div class="example">
+                                        <div class="description">
+                                            <div class="description-text">
+                                                <div class="row no-gutters align-items-center justify-content-between">
+
+                                                    <div class="list-title text-muted">
+
+                                                        <div class="row p-xl-1" ng-if="msg!=''">
+
+                                                            <div class="preview">
+                                                                <div class="preview-elements">
+                                                                    <div class="alert alert-warning alert-dismissible fade show"
+                                                                         role="alert">
+                                                                        <button type="button" class="close" data-dismiss="alert"
+                                                                                aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                        <strong>{{msg}}</strong>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="toggle-source-preview">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="source-preview-wrapper">
+                                            <div class="preview">
+                                                <div class="preview-elements">
+                                                    <div class="container">
+                                                        <form>
+
+
+                                                            <div class="row">
+
+                                                                <div class="form-group col-md-6">
+
+                                                                    <div class="row">
+
+                                                                        <div class="form-group col-md-6">
+                                                                            <label class="col-form-label">Generate Payroll based on</label>
+
+                                                                            <input class="col-form-label" type="radio"
+                                                                                   name="payrollGenOptions"
+                                                                                   ng-model="AppSettingsModel.payrollGenOptions"
+                                                                                   value="Attendence" ng-checked="AppSettingsModel.payrollGenOptions!='Timesheet'" /> Attendence
+                                                                            &nbsp;  &nbsp;
+                                                                            <input class="col-form-label" type="radio"
+                                                                                   name="payrollGenOptions"
+                                                                                   ng-model="AppSettingsModel.payrollGenOptions"
+                                                                                   value="Timesheet" ng-checked="AppSettingsModel.payrollGenOptions=='Timesheet'" /> Timesheet
+                                                                        </div>
+
+                                                                        <div class="form-group col-md-6">
+                                                                            <label class="col-form-label">TaxRegime Default Options</label>
+
+                                                                            <input class="col-form-label"  type="radio"
+                                                                                   name="taxRegimeDefaultOptions"
+                                                                                   ng-model="AppSettingsModel.taxRegimeDefaultOptions"
+                                                                                   value="Old_Regime" ng-checked="AppSettingsModel.taxRegimeDefaultOptions!='New_Regime'" /> Old_Regime
+                                                                            &nbsp;  &nbsp;
+                                                                            <input class="col-form-label" type="radio"
+                                                                                   name="taxRegimeDefaultOptions"
+                                                                                   ng-model="AppSettingsModel.taxRegimeDefaultOptions"
+                                                                                   value="New_Regime" ng-checked="AppSettingsModel.taxRegimeDefaultOptions=='New_Regime'" /> New_Regime
+
+                                                                  
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                         
+
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                   
+                                                                    <div class="row">
+
+                                                                        <div class="form-group col-md-8">
+                                                                            <label class="col-form-label">Working Days</label>
+
+                                                                            <input class="col-form-label" type="radio"
+                                                                                   name="defaultWorkingDays"
+                                                                                   ng-model="AppSettingsModel.defaultWorkingDays"
+                                                                                   value="5D" ng-checked="AppSettingsModel.defaultWorkingDays!='Timesheet'" /> 5 Days (Mon-Fri)
+                                                                            &nbsp;  &nbsp;
+                                                                            <input class="col-form-label" type="radio"
+                                                                                   name="defaultWorkingDays"
+                                                                                   ng-model="AppSettingsModel.defaultWorkingDays"
+                                                                                   value="6D" ng-checked="AppSettingsModel.defaultWorkingDays=='Timesheet'" /> 6 Days (Mon-Sat)
+                                                                        </div>
+
+                                                                        <div class="form-group col-md-4">
+                                                                            
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+                                                                  
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row"> 
+
+
+                                                                <div class="form-group col-md-6">
+                                                                    <div class="card">
+                                                                        <a data-toggle="collapse" href="#collapseAttend"
+                                                                               aria-expanded="true"
+                                                                               aria-controls="collapseOne">
+                                                                            <div class="card-header bg-lime" role="tab" id="headingOne">
+                                                                                <div class="col-6">
+                                                                                    Attendence Settings
+
+                                                                                </div>
+                                                                                <div class="col-3"></div>
+                                                                                <div class="col-3">
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                        <div id="collapseAttend" class="collapse show" role="tabpanel"
+                                                                             aria-labelledby="headingOne"
+                                                                             data-parent="#accordion">
+                                                                            <div class="card-block">
+
+
+
+                                                                                <div class="row p-xl-1">
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                        Attendence Grace Period (minutes)
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+
+                                                                                   
+                                                                                        <input type="text" name="AppSettingsModel" ng-model="AppSettingsModel.attendenceGracePeriodAlert" class="defaultTextBox">
+
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row p-xl-1">
+
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                        Attendence Daily Hours
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+
+                                                                                    
+                                                                                        <input type="number" name="AppSettingsModel" ng-model="AppSettingsModel.attendenceDailyHours" class="defaultTextBox">
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                <div class="row p-xl-1">
+
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                      Notification
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+
+                                                                                    
+                                                                                      
+
+                                                                                        <input class="col-form-label" type="radio"
+                                                                                               name="attendenceCommNotification"
+                                                                                               ng-model="AppSettingsModel.attendenceCommNotification"
+                                                                                               value="Email" ng-checked="AppSettingsModel.attendenceCommNotification!='SMS'" /> Email
+                                                                                        &nbsp;  &nbsp;
+                                                                                        <input class="col-form-label" type="radio"
+                                                                                               name="attendenceCommNotification"
+                                                                                               ng-model="AppSettingsModel.attendenceCommNotification"
+                                                                                               value="SMS" ng-checked="AppSettingsModel.attendenceCommNotification=='SMS'" /> SMS
+
+                                                                  
+
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="row p-xl-1">
+
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                         Missed Notification
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+
+                                                                                    
+                                                                                      
+
+                                                                                        <input class="col-form-label" type="radio"
+                                                                                               name="attendenceMissedNotification"
+                                                                                               ng-model="AppSettingsModel.attendenceMissedNotification"
+                                                                                               value="Email" ng-checked="AppSettingsModel.attendenceMissedNotification!='SMS'" /> Email
+                                                                                        &nbsp;  &nbsp;
+                                                                                        <input class="col-form-label" type="radio"
+                                                                                               name="attendenceMissedNotification"
+                                                                                               ng-model="AppSettingsModel.attendenceMissedNotification"
+                                                                                               value="SMS" ng-checked="AppSettingsModel.attendenceMissedNotification=='SMS'" /> SMS
+
+                                                                  
+
+                                                                                    </div>
+
+                                                                                </div>
+
+
+
+                                                                                 <div class="row p-xl-1">
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                        Attendence Late Rules (days)
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+
+                                                                                   
+                                                                                        <input type="text" name="AppSettingsModel" ng-model="AppSettingsModel.attendenceLateRules" class="defaultTextBox">
+
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row p-xl-1">
+
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                        Less Logged Hours Rules (weekly)
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+
+                                                                                    
+                                                                                        <input type="text" name="AppSettingsModel" ng-model="AppSettingsModel.attendenceLessHoursRules" class="defaultTextBox">
+                                                                                    </div>
+
+                                                                                </div>
+
+
+
+                                                                            </div> <!-- card block-->
+                                                                        </div> <!-- collapse-->
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                     
+                                                                        <div class="card">
+                                                                            <a data-toggle="collapse" href="#collapseTime"
+                                                                                   aria-expanded="true"
+                                                                                   aria-controls="collapseOne">
+                                                                            <div class="card-header bg-lime-400" role="tab" id="headingOne">
+                                                                                    <div class="col-6">
+                                                                                        Timesheet Settings
+
+                                                                                    </div>
+                                                                                    <div class="col-3"></div>
+                                                                                    <div class="col-3">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                            <div id="collapseTime" class="collapse" role="tabpanel"
+                                                                                 aria-labelledby="headingOne"
+                                                                                 data-parent="#accordion">
+                                                                                <div class="card-block">
+
+
+
+                                                                                    <div class="row p-xl-1">
+                                                                                    
+                                                                                        <div class="col-5 col-form-label">
+                                                                                            Timesheet Grace Period (minutes)
+                                                                                        </div>
+
+                                                                                        <div class="col-7">
+
+                                                                                   
+                                                                                            <input type="text" name="AppSettingsModel" ng-model="AppSettingsModel.timesheetGracePeriodAlert" class="defaultTextBox">
+
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row p-xl-1">
+
+                                                                                    
+                                                                                        <div class="col-5 col-form-label">
+                                                                                            Timesheet Daily Hours
+
+                                                                                        </div>
+
+                                                                                        <div class="col-7">
+
+                                                                                    
+                                                                                            <input type="number" name="AppSettingsModel" ng-model="AppSettingsModel.timesheetDailyHours" class="defaultTextBox">
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                    <div class="row p-xl-1">
+
+                                                                                    
+                                                                                        <div class="col-5 col-form-label">
+                                                                                            Notification
+                                                                                        </div>
+
+                                                                                        <div class="col-7">
+
+                                                                                    
+                                                                                      
+
+                                                                                            <input class="col-form-label" type="radio"
+                                                                                               name="timesheetCommNotification"
+                                                                                               ng-model="AppSettingsModel.timesheetCommNotification"
+                                                                                                   value="Email" ng-checked="AppSettingsModel.timesheetCommNotification!='SMS'" /> Email
+                                                                                            &nbsp;  &nbsp;
+                                                                                            <input class="col-form-label" type="radio"
+                                                                                               name="timesheetCommNotification"
+                                                                                               ng-model="AppSettingsModel.timesheetCommNotification"
+                                                                                               value="SMS" ng-checked="AppSettingsModel.timesheetCommNotification=='SMS'" /> SMS
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                    <div class="row p-xl-1">
+
+                                                                                    
+                                                                                        <div class="col-5 col-form-label">
+                                                                                            Missed Notification
+                                                                                        </div>
+
+                                                                                        <div class="col-7"> 
+
+                                                                                            <input class="col-form-label" type="radio"
+                                                                                               name="timesheetMissedNotification"
+                                                                                                   ng-model="AppSettingsModel.timesheetMissedNotification"
+                                                                                               value="Email" ng-checked="AppSettingsModel.timesheetMissedNotification!='SMS'" /> Email
+                                                                                            &nbsp;  &nbsp;
+                                                                                            <input class="col-form-label" type="radio"
+                                                                                               name="timesheetMissedNotification"
+                                                                                               ng-model="AppSettingsModel.timesheetMissedNotification"
+                                                                                               value="SMS" ng-checked="AppSettingsModel.timesheetMissedNotification=='SMS'" /> SMS
+                                                                                                    
+
+                                                                                        </div>
+
+                                                                                    </div> 
+
+
+                                                                                </div> <!-- card block-->
+                                                                            </div> <!-- collapse-->
+                                                                        </div>
+
+                                                                    
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+
+                                                                <div class="form-group col-md-6">
+                                                                   
+                                                                    <div class="card">
+                                                                        <a data-toggle="collapse" href="#collapseTax"
+                                                                               aria-expanded="true"
+                                                                               aria-controls="collapseOne">
+                                                                            <div class="card-header bg-blue-grey" role="tab" id="headingOne">
+                                                                                <div class="col-6 text-white">
+                                                                                    Tax Settings
+
+                                                                                </div>
+                                                                                <div class="col-3"></div>
+                                                                                <div class="col-3">
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                        <div id="collapseTax" class="collapse" role="tabpanel"
+                                                                             aria-labelledby="headingOne"
+                                                                             data-parent="#accordion">
+                                                                            <div class="card-block">
+
+
+
+                                                                                <div class="row p-xl-1">
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                        Tax Grace Period (Month)
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+
+                                                                                   
+                                                                                        <input type="text" name="AppSettingsModel" ng-model="AppSettingsModel.taxDeclareGracePeriodAlert" class="defaultTextBox">
+
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row p-xl-1">
+
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                        Notification
+
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+                                                                                        
+                                                                                        <input class="col-form-label" type="radio"
+                                                                                               name="taxDeclareCommNotification"
+                                                                                               ng-model="AppSettingsModel.taxDeclareCommNotification"
+                                                                                               value="Email" ng-checked="AppSettingsModel.taxDeclareCommNotification!='SMS'" /> Email
+                                                                                        &nbsp;  &nbsp;
+                                                                                        <input class="col-form-label" type="radio"
+                                                                                               name="taxDeclareCommNotification"
+                                                                                               ng-model="AppSettingsModel.taxDeclareCommNotification"
+                                                                                               value="SMS" ng-checked="AppSettingsModel.taxDeclareCommNotification=='SMS'" /> SMS
+                                                                                    
+                                                                                        
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                 
+                                                                                <div class="row p-xl-1">
+
+                                                                                    
+                                                                                    <div class="col-5 col-form-label">
+                                                                                        Missed Notification
+                                                                                    </div>
+
+                                                                                    <div class="col-7">
+
+                                                                                        <input class="col-form-label" type="radio"
+                                                                                               name="taxDeclareMissedNotification"
+                                                                                               ng-model="AppSettingsModel.taxDeclareMissedNotification"
+                                                                                               value="Email" ng-checked="AppSettingsModel.taxDeclareMissedNotification!='SMS'" /> Email
+                                                                                        &nbsp;  &nbsp;
+                                                                                        <input class="col-form-label" type="radio"
+                                                                                               name="taxDeclareMissedNotification"
+                                                                                               ng-model="AppSettingsModel.taxDeclareMissedNotification"
+                                                                                               value="SMS" ng-checked="AppSettingsModel.taxDeclareMissedNotification=='SMS'" /> SMS
+
+                                                                                                    
+                                                                                    </div>
+
+                                                                                </div>
+
+
+                                                                            </div> <!-- card block-->
+                                                                        </div> <!-- collapse-->
+                                                                    </div>
+
+                                                                    
+
+
+                                                                </div>
+
+                                                                <div class="form-group col-md-6">
+
+                                                                    <div class="col-5 col-form-label">
+                                                                        Leave Carry Forward
+                                                                    </div>
+
+                                                                    <div class="col-7">
+                                                                         
+                                                                        <input class="col-form-label" type="radio"
+                                                                               name="leaveCarryForward"
+                                                                               ng-model="AppSettingsModel.leaveCarryForward"
+                                                                               value="No" ng-checked="AppSettingsModel.leaveCarryForward!='Yes'" /> No
+                                                                        &nbsp;  &nbsp;
+                                                                        <input class="col-form-label" type="radio"
+                                                                               name="leaveCarryForward"
+                                                                               ng-model="AppSettingsModel.leaveCarryForward"
+                                                                               value="Yes" ng-checked="AppSettingsModel.leaveCarryForward=='Yes'" /> Yes
+
+                                                                                                    
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                 
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label class="col-form-label">Last Updated Date : {{AppSettingsModel.submittedDate}}</label>
+                                                                    <input type="hidden" name="AppSettingsModel" ng-model="AppSettingsModel.appSettingID">
+                                                                    <input type="hidden" name="AppSettingsModel" ng-model="AppSettingsModel.companyCode">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="row">
+                                                                <div class="form-group col-md-4">
+                                                                    <button type="button" class="btn btn-outline-primary" aria-label="Product details" ng-click="SaveAppSettings(AppSettingsModel)">
+                                                                        Save
+                                                                    </button>
+
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- USING THE GRID COMPLEX -->
+
+
+
+                            </div>
+
+
+                            <!-- / SUB CONTENT -->
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- / CONTENT -->
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

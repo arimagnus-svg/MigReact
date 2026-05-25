@@ -1,0 +1,399 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title</title>
+
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-store" />
+    <meta http-equiv="expires" content="-1" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <!-- STYLESHEETS -->
+    <style type="text/css">
+        [fuse-cloak],
+        .fuse-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Icons.css -->
+    <link type="text/css" rel="stylesheet" href="~/css/style.css">
+
+    <!-- Animate.css -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/animate.css/animate.min.css">
+
+    <!-- PNotify -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/pnotify/pnotify.custom.min.css">
+
+    <!-- Nvd3 - D3 Charts -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/nvd3/build/nv.d3.min.css" />
+
+    <!-- Perfect Scrollbar -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+
+    <!-- Fuse Html -->
+    <link type="text/css" rel="stylesheet" href="~/css/vendor/fuse-html/fuse-html.min.css" />
+
+    <!-- Main CSS -->
+    <link type="text/css" rel="stylesheet" href="~/css/main.css">
+    <!-- / STYLESHEETS -->
+    <!-- JAVASCRIPT -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="~/lib/js/jquery/dist/jquery.min.js"></script>
+
+    <!-- Mobile Detect -->
+    <script type="text/javascript" src="~/lib/js/mobile-detect/mobile-detect.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script type="text/javascript"
+            src="~/lib/js/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+
+    <!-- Popper.js -->
+    <script type="text/javascript" src="~/lib/js/popper.js/index.js"></script>
+
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="~/lib/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Nvd3 - D3 Charts -->
+    <script type="text/javascript" src="~/lib/js/d3/d3.min.js"></script>
+    <script type="text/javascript" src="~/lib/js/nvd3/build/nv.d3.min.js"></script>
+
+    <!-- Data tables -->
+    <script type="text/javascript" src="~/lib/js/datatables.net/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript"
+            src="~/lib/js/datatables-responsive/js/dataTables.responsive.js"></script>
+
+    <!-- PNotify -->
+    <script type="text/javascript" src="~/lib/js/pnotify/pnotify.custom.min.js"></script>
+
+    <!-- Fuse Html -->
+    <script type="text/javascript" src="~/lib/js/fuse-html/fuse-html.min.js"></script>
+
+    <!-- Main JS -->
+    <script type="text/javascript" src="~/lib/js/main.js"></script>
+
+    <!-- / JAVASCRIPT -->
+</head>
+
+<body class="layout layout-vertical layout-left-navigation layout-above-toolbar">
+
+    <nav id="toolbar" class="fixed-top bg-white">
+
+        <div class="row no-gutters align-items-center flex-nowrap">
+
+            <div class="col">
+
+                <div class="row no-gutters align-items-center flex-nowrap d-print-none">
+
+                    <button type="button" class="toggle-aside-button btn btn-icon d-block d-lg-none"
+                            data-fuse-bar-toggle="aside">
+                        <i class="icon icon-menu"></i>
+                    </button>
+
+                    <div class="toolbar-separator d-block d-lg-none"></div>
+
+                    <div class="shortcuts-wrapper row no-gutters align-items-center px-0 px-sm-2">
+
+                          
+
+                        <div class="shortcuts row no-gutters align-items-center d-none d-md-flex">
+                        </div>
+                        <div class="add-shortcut-menu-button dropdown px-1 px-sm-3">
+
+                            <img alt="Logo" src="~/img/Arimagnus_Logo.png">
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="toolbar-separator"></div>
+
+                </div>
+            </div>
+
+            <div class="col-auto">
+
+                <div class="row no-gutters align-items-center justify-content-end d-print-none">
+
+                    <div class="user-menu-button dropdown">
+
+                         
+
+                        <div class="dropdown-toggle ripple row align-items-center no-gutters px-2 px-sm-4"
+                             role="button"
+                             id="dropdownUserMenu"
+                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="avatar-wrapper">
+                                <img class="avatar" src="~/img/users/profile.jpg">
+                                <i class="status text-green icon-checkbox-marked-circle s-4"></i>
+                            </div>
+                            <span class="username mx-3 d-none d-md-block">
+                                 
+                                @HttpContextAccessor.HttpContext.Session.GetString("userName")
+                            </span>
+                        </div>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownUserMenu">
+
+                             
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="/Account/Logout">
+                                <div class="row no-gutters align-items-center flex-nowrap">
+                                    <i class="icon-logout"></i>
+                                    <span class="px-3">Logout</span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="toolbar-separator"></div>
+
+                     
+
+                    <div class="language-button dropdown">
+
+                        <div class="dropdown-toggle ripple row align-items-center justify-content-center no-gutters px-0 px-sm-4"
+                             role="button"
+                             id="dropdownLanguageMenu"
+                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="row no-gutters align-items-center">
+                                <img class="flag mr-2" src="~/img/flags/us.png">
+                                <span class="d-none d-md-block">EN</span>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownLanguageMenu">
+
+                            <a class="dropdown-item" href="#">
+                                <div class="row no-gutters align-items-center flex-nowrap">
+                                    <img class="flag" src="~/img/flags/us.png">
+                                    <span class="px-3">English</span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="toolbar-separator"></div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="wrapper">
+
+        <aside id="aside" class="aside aside-left"
+               data-fuse-bar="aside" data-fuse-bar-media-step="md"
+               data-fuse-bar-position="left">
+            <div class="aside-content-wrapper">
+
+                <div class="aside-content">
+
+                    <div class="aside-toolbar">
+
+                        <div class="logo">
+                             
+                        </div>
+
+                        <button id="toggle-fold-aside-button" type="button" class="btn btn-icon d-none d-lg-block"
+                                data-fuse-aside-toggle-fold>
+                            <i class="icon icon-backburger"></i>
+                        </button>
+
+                    </div>
+
+                    <ul class="nav flex-column custom-scrollbar" id="sidenav" data-children=".nav-item">
+
+
+
+                        <li class="nav-item" role="tab" id="heading-ecommerc1e">
+
+                            <a class="nav-link ripple with-arrow collapsed"
+                               data-toggle="collapse"
+                               data-target="#collapse-ecommerce"
+                               href="#"
+                               aria-expanded="false"
+                               aria-controls="collapse-ecommerce">
+                                <i class="icon s-4 icon-server"></i>
+                                <span>Tax</span>
+                            </a>
+
+                            <ul id="collapse-ecommerce"
+                                class="collapse"
+                                role="tabpanel"
+                                aria-labelledby="heading-ecommerce"
+                                data-children=".nav-item">
+
+                                <li class="nav-item">
+                                    <a class="nav-link ripple " href="/Formb/TaxFormBdetails">
+
+                                        <span>Form B Declaration</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link ripple " href="/Formb/TaxFormBsubmit">
+
+                                        <span>Form B Investment submission</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link ripple " href="/TaxRegime/TaxRegimeOptionview">
+
+                                        <span>Tax Regime Selection</span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        <li class="nav-item" role="tab" id="heading-salary2">
+
+                            <a class="nav-link ripple with-arrow collapsed"
+                               data-toggle="collapse"
+                               data-target="#collapse-salary2"
+                               href="#"
+                               aria-expanded="false"
+                               aria-controls="collapse-salary2">
+                                <i class="icon s-4 icon-credit-card"></i>
+                                <span>Flexi Benefits</span>
+                            </a>
+
+                            <ul id="collapse-salary2"
+                                class="collapse"
+                                role="tabpanel"
+                                aria-labelledby="heading-salary2"
+                                data-children=".nav-item">
+
+                                <li class="nav-item">
+
+
+                                    <a class="nav-link ripple " href="/FlexiService/FlexiBeneview">
+
+                                        <span>Declare Benefits</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+
+
+                                    <a class="nav-link ripple " href="/FlexiService/FlexiBeneReimburseView">
+
+                                        <span>Reimbursement</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item" role="tab" id="heading-salary1">
+
+                            <a class="nav-link ripple with-arrow collapsed"
+                               data-toggle="collapse"
+                               data-target="#collapse-salary1"
+                               href="#"
+                               aria-expanded="false"
+                               aria-controls="collapse-salary1">
+                                <i class="icon s-4 icon-credit-card"></i>
+                                <span>Payslip</span>
+                            </a>
+
+                            <ul id="collapse-salary1"
+                                class="collapse"
+                                role="tabpanel"
+                                aria-labelledby="heading-salary1"
+                                data-children=".nav-item">
+
+                                <li class="nav-item">
+
+
+                                    <a class="nav-link ripple " href="/SalaryGenProcess/ShowPayroll">
+
+                                        <span>View Payroll</span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item" role="tab" id="heading-myInfo">
+
+                            <a class="nav-link ripple with-arrow collapsed"
+                               data-toggle="collapse"
+                               data-target="#collapse-myInfo"
+                               href="#"
+                               aria-expanded="false"
+                               aria-controls="collapse-myInfo">
+                                <i class="icon s-4 icon-account"></i>
+                                <span>My Info</span>
+                            </a>
+
+                            <ul id="collapse-myInfo"
+                                class="collapse"
+                                role="tabpanel"
+                                aria-labelledby="heading-myInfo"
+                                data-children=".nav-item">
+
+                                <li class="nav-item">
+                                    <a class="nav-link ripple " href="/SelfService/BankPFview">
+
+                                        <span>View/Upate Bank/PF Account</span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+
+
+        @RenderBody()
+
+
+
+
+        <div class="quick-panel-sidebar" fuse-cloak data-fuse-bar="quick-panel-sidebar"
+             data-fuse-bar-position="right">
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,202 @@
+﻿@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/lib/js/popper.js/index.js"></script>
+    <script type="text/javascript" src="~/lib/js/FileSaver.js"></script>
+
+    <script src="~/lib/appJS/ReportSetup.js"></script>
+
+
+
+
+}
+
+
+
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="e-commerce-orders" class="page-layout carded full-width">
+
+            <div class="top-bg bg-primary"></div>
+
+            <!-- CONTENT -->
+            <div class="page-content" ng-app="ReportService" ng-controller="ReportController" ng-init="LoadSettlementDetails()">
+
+                <!-- HEADER -->
+                <div class="header  bg-primary text-auto row no-gutters align-items-center justify-content-between">
+
+                    <!-- APP TITLE -->
+                    <div class="col-12 col-sm">
+
+                        <div class="logo row no-gutters align-items-start">
+
+                            <div class="logo-icon mr-3 mt-1">
+                                <i class="icon-cart-outline s-6"></i>
+                            </div>
+
+                            <div class="logo-text">
+                                <div class="h4">Settlement Report</div>
+                                <div class=""></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / APP TITLE -->
+                    <!-- SEARCH -->
+                    <div class="col search-wrapper pl-2">
+                        <div class="row col-12">
+
+                            <div>
+                                <div class="logo-icon mr-3 mt-1"><label>Select Year</label></div>
+
+                                <div class="logo-text">
+                                    <select class="form-control col-md-6" ng-model="Years">
+                                        <option ng-repeat="L in Years" value="{{L}}">
+                                            {{L}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="logo-icon mr-3 mt-1"><label>Report Type</label></div>
+                                <div class="logo-text">
+                                    <select ng-model="ReportName" class="form-control">
+                                        <option value="">select options</option>
+                                        <option ng-repeat="type in RepType" ng-value="type">
+                                            {{type}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="logo-icon mr-3 mt-1"> &nbsp;</div>
+                                <div class="logo-text">
+                                    <button class="btn btn-link shadow-none text-white" ng-click="LoadSettlementDetails(Years,ReportName)">
+                                        <i class="icon s-4 icon-search-web"></i>
+                                        Search
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / SEARCH -->
+                </div>
+                <!-- / HEADER -->
+
+                <div class="page-content-card">
+
+                    <table id="formSummary-table" class="table dataTable">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Employee ID</span>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Resignation Date</span>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">LWD</span>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Settlement Date</span>
+                                    </div>
+                                </th>
+
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Notice Period</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Excess Notice Day </span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Total Leave Encash</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Last Payout Month</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">LeavingReason</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Status</span>
+                                    </div>
+                                </th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr ng-repeat="settlementList in settlementList" tableload>
+                                <td>{{settlementList.employeeID}}</td>
+                                <td>{{settlementList.resignationDate}}</td>
+                                <td>{{settlementList.lwd}}</td>
+                                <td>{{settlementList.settlementDate}}</td>
+                                <td>
+                                    <span class="badge badge-info">{{settlementList.noticePeriod}}</span>
+                                </td>
+                                <td>{{settlementList.daysServed}}</td>
+                                <td>{{settlementList.totalLeaveEncash}}</td>
+                                <td>{{settlementList.lastPayoutMonth}}</td>
+                                <td>{{settlementList.leavingReason}}</td>
+                                <td class="date">
+                                    <span class="badge badge-success" ng-if="settlementList.status>1"> Declared</span>
+                                    <span class="badge badge-success" ng-if="settlementList.status<2"> Pending</span>
+                                </td>
+                                <td>
+
+
+                                    <a data-ng-href="@Url.Action("EditSettlement", "Settlement")?FinalSettlementID={{settlementList.finalSettlementID}}">
+                                        <i class="icon icon-pencil s-4"></i>
+                                    </a>
+
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <div>
+                        &nbsp;  <button class="btn-warning" ng-click="DownloadExcel(settlementList)"><i class="icon icon-download s-4"></i>Export to Excel</button>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- / CONTENT -->
+        </div>
+
+    </div>
+</div>

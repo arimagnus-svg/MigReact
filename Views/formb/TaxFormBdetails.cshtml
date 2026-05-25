@@ -1,0 +1,1259 @@
+﻿@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+
+    <script src="~/lib/appJS/FormBVal.js"></script>
+
+
+}
+@inject IHttpContextAccessor HttpContextAccessor
+<div class="content-wrapper">
+
+    <div class="content">
+        <div class="source-preview-wrapper">
+            <div class="preview">
+                <div class="preview-elements">
+
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Auth/Home">Home</a></li>
+                      </ol>
+                </div>
+            </div>
+        </div>
+        <div id="e-commerce-product" class="page-layout simple tabbed" ng-app="TaxBApp" data-ng-controller="TaxBController" ng-init="LoadFormBdetails('@Html.Raw(ViewBag.Action)','@Html.Raw(ViewBag.Message)')" name="form">
+
+            <!-- HEADER -->
+            <div class="page-header bg-primary text-auto row no-gutters align-items-center justify-content-between p-2">
+                <div class="row col-md-12">
+                    s
+                    <div class="logo row no-gutters align-items-start">
+
+                        <div class="logo-icon mr-3 mt-1">
+                        </div>
+
+                        <div class="logo-text">
+                            <div class="h4">FORM -B Details</div>
+                            <div class=""></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row col-md-12" ng-repeat="EmployeeModel in employeeList | filter:{ employeeID: formBList.employeeID}">
+
+                    <div class="form-group col-md-2">
+                        <label>Employe ID</label>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>{{EmployeeModel.employeeID}}</label>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>Name</label>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>{{EmployeeModel.employeeName}}</label>
+                    </div>
+
+                    <div class="form-group col-md-1">
+                        <label>Status</label>
+                    </div>
+
+                    <div class="form-group col-md-2" ng-if="EmployeeModel.status==0">
+                        Active
+                    </div>
+                    <div class="form-group col-md-2" ng-if="EmployeeModel.status>1">
+                        In-Active
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>DOJ</label>
+                    </div>
+                    <div class="form-group col-md-1">
+
+                        <label>Hidden</label>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <!-- / HEADER -->
+            <!-- CONTENT -->
+            <div class="page-content">
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link btn active" id="basic-info-tab" data-toggle="tab"
+                           href="#basic-info-tab-pane"
+                           role="tab" aria-controls="basic-info-tab-pane" aria-expanded="true">
+                            TAX DETAILS  
+                        </a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link btn" id="product-images-tab" data-toggle="tab"
+                           href="#product-images-tab-pane"
+                           role="tab" aria-controls="product-images-tab-pane">DEDUCTION UNDER SECTION 80</a>
+                    </li>
+                    <li class="nav-item" ng-if="Regime == 'Old_Tax_Regime'">
+                        <a class="nav-link btn" id="houseRent-images-tab" data-toggle="tab"
+                           href="#houseRent-images-tab-pane"
+                           role="tab" aria-controls="houseRent-images-tab-pane">House Rent </a>
+                    </li>
+
+
+                    <li class="nav-item" ng-if="Regime == 'Old_Tax_Regime'">
+                        <a class="nav-link btn" id="HouseProp-images-tab" data-toggle="tab"
+                           href="#HouseProp-images-tab-pane"
+                           role="tab" aria-controls="HouseProp-images-tab-pane">House Property Details</a>
+                    </li>
+
+
+
+
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="basic-info-tab-pane" role="tabpanel"
+                         aria-labelledby="basic-info-tab">
+
+                        <div class="card p-6">
+                            <div class="row p-xl-1 div-border bg-grey">
+
+                                <div class="col-6">
+                                    Description                                   
+
+                                </div>
+                                <div class="col-3">
+                                    Deductible Amount
+
+                                </div>
+                                <div class="col-3">
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    Financial Year
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="formBList" ng-model="formBList.finYear" class="defaultTextBox">
+                                </div>
+                                <div class="col-3">
+                                    
+
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    PREVIOUS EMPLOYER IT DETAILS
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="formBList" ng-model="formBList.prevEmployerITDetails" class="defaultTextBox">
+                                </div>
+                                <div class="col-3">
+                                   
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    PREVIOUS EMPLOYER INCOME TAX
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.prevEmployerIncomeTax" class="defaultTextBox">
+                                    <input type="hidden" name="formBList" ng-model="formBList.employeeID">
+                                    <input type="hidden" name="formBList" ng-model="formBList.formID" readonly>
+
+                                </div>
+                                <div class="col-3">
+                                    
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    PREVIOUS EMPLOYER PF
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.prevEmployerProvidentFund" class="defaultTextBox">
+
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    PREVIOUS EMPLOYER PROFESSION TAX
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.prevEmployerProfessionTax" class="defaultTextBox">
+
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    PREVIOUS EMPLOYER INCOME AFTER U/S 10 EXEMPTION
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.prevEmployerIncomeUS10Ex" class="defaultTextBox">
+
+                                </div>
+                                <div class="col-3">
+                                   
+                                </div>
+
+                            </div>
+
+                            <div class="row p-xl-1 div-border bg-grey-300">
+
+                                <div class="col-12">
+                                    ADD ANY OTHER INCOME
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    BANK INTEREST
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.bankInterest" class="defaultTextBox">
+
+                                </div>
+                                <div class="col-3">
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    OTHER INCOME
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.otherIncome" class="defaultTextBox">
+
+                                </div>
+                                <div class="col-3">
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row p-xl-1 div-border bg-grey-300">
+                                <div class="col-12">
+                                    EXEMPTION UNDER SECTION 10
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    NO OF CHILDREN
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.totalChildren" class="defaultTextBox">
+
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    NO OF CHILDREN'S STAYING IN HOSTEL
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.noChildStayHostel" class="defaultTextBox">
+                                </div>
+                                <div class="col-3">
+                                   
+
+                                </div>
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    TELEPHONE BILLS
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.telephoneBills" class="defaultTextBox">
+                                </div>
+                                <div class="col-3">
+                                   
+
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    BOOKS & PERIODICALS BILL
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="formBList" ng-model="formBList.booksPriodicalBill" class="defaultTextBox">
+                                </div>
+                                <div class="col-3">
+                                   
+
+                                </div>
+
+                            </div>
+
+                            <div class="row p-xl-1 div-border">
+
+                                <div class="col-9"></div>
+                                <div class="col-3">
+
+
+                                </div>
+                                <div class="col-12">
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="product-images-tab-pane" role="tabpanel"
+                         aria-labelledby="product-images-tab">
+
+                        <div class="card p-6">
+
+
+                            <div class="row p-xl-1 div-border bg-grey">
+                                <div class="col-6" ng-if="Regime=='Old_Tax_Regime'">
+                                    SECTION 80C ,80CCC,80CCD
+                                </div>
+                                <div class="col-6" ng-if="Regime=='New_Tax_Regime'">
+                                   NPS AND OTHER SECTIONS 
+                                </div>
+                                <div class="col-3">
+                                    Slab Amount
+
+
+                                </div>
+                                <div class="col-3">
+                                    Declared Amount
+                                </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border" ng-if="Regime=='Old_Tax_Regime'">
+                                <div class="col-6">
+                                    LIFE INSURANCE
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-2">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.lifeIns" class="defaultTextBox">
+
+                                </div> 
+                              
+                            </div>
+                            <div class="row p-xl-1 div-border" ng-if="Regime=='Old_Tax_Regime'">
+                                <div class="col-6">
+                                    REPAY OF HOUSING LOAN PRINCIPAL
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-2">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.repayHL" class="defaultTextBox">
+                                </div>
+                                 
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    PPF
+                                </div>
+                                <div class="col-3">
+                                     
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.ppf" class="defaultTextBox">
+                                </div>
+                                
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    NSC DETAILS
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.nsc" class="defaultTextBox">
+                                </div>
+                                
+                            </div>
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    PPF
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.ppf" class="defaultTextBox">
+                                </div>
+                                
+                            </div>
+
+                            <div class="row p-xl-1 div-border" ng-if="Regime=='Old_Tax_Regime'">
+                                <div class="col-6">
+                                    BONDS
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.bonds" class="defaultTextBox">
+                                </div>
+
+                            </div>
+
+                            <div class="row p-xl-1 div-border" ng-if="Regime=='Old_Tax_Regime'">
+                                <div class="col-6">
+                                    FIXED DEPOSIT-BANK
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.fd" class="defaultTextBox">
+                                </div>
+                               
+                            </div>
+                            <div class="row p-xl-1 div-border" ng-if="Regime=='Old_Tax_Regime'">
+                                <div class="col-6">
+                                    SUKHANYA SAMRIDDHI
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.sukhanyaSamriddhi" class="defaultTextBox">
+                                </div>
+                                 
+                            </div>
+
+
+                            <div class="row p-xl-1 div-border" ng-if="Regime=='Old_Tax_Regime'">
+                                <div class="col-6">
+                                    ESS/MUTUAL BONDS
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.ess_mf" class="defaultTextBox">
+                                </div>
+                                
+                            </div>
+
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    NSS DETAILS
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.nss" class="defaultTextBox">
+                                </div>
+                                
+                            </div>
+
+
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    OTHER CONTRIBUTIONS FOR SECTION 80
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.otherContriSectin88" class="defaultTextBox">
+                                </div>
+                               
+                            </div>
+
+
+
+                            <div class="row p-xl-1 div-border bg-grey-200">
+                                <div class="col-12">
+                                    UNDER SECTION 80CCC
+                                </div>
+                            </div>
+
+                            <div class="row p-xl-1 div-border">
+                                <div class="col-6">
+                                    NATIONAL PENSION SCHEME
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.ccc80nps" class="defaultTextBox">
+                                </div>
+                                 
+                            </div>
+                            <div class="row p-xl-1 div-border" ng-if="Regime =='Old_Tax_Regime'">
+                                <div class="col-6">
+                                    TUTION FEES
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" name="TaxSec80List" ng-model="TaxSec80List.ccc80TutionFee" class="defaultTextBox">
+                                </div>
+
+                            </div>
+
+                            <div class="row p-xl-1 div-border bg-grey-200" ng-if="Regime=='Old_Tax_Regime'">
+
+                                <div class="col-6">OTHER SECTION UNDER CHAPTER VI-A</div>
+                                <div class="col-3"></div>
+                                <div class="col-3"> </div>
+
+                            </div>
+                            <div class="row p-xl-1 div-border " ng-if="Regime=='Old_Tax_Regime'">
+
+                                <div class="col-9">US 80D MEDICAL INSURANCE</div>
+                                <div class="col-3">
+                                    <input type="text" name="Person" ng-model="TaxSecVIAOtherList.approvedAmount" class="defaultTextBox">
+                                </div>
+                                <div class="col-12">
+                                    <div class="source-preview-wrapper" ng-repeat="TaxSectionVIAotherModel in TaxSecVIAOtherList">
+                                        <!--ng-repeat="HousePropertyModel in TaxSec80List"-->
+                                        <div class="preview">
+                                            <div class="preview-elements">
+                                                <div id="accordion" role="tablist">
+                                                    <div class="card">
+                                                        <a data-toggle="collapse" href="#collapse80D{{TaxSectionVIAotherModel.taxSectionID}}"
+                                                           aria-expanded="true"
+                                                           aria-controls="collapseOne">
+                                                            <div class="card-header" role="tab" id="headingOne">
+                                                                <div class="col-6">
+                                                                    US 80D MEDICAL INSURANCE
+
+                                                                </div>
+                                                                <div class="col-3"></div>
+                                                                <div class="col-3">
+
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <div id="collapse80D{{TaxSectionVIAotherModel.taxSectionID}}" class="collapse" role="tabpanel"
+                                                             aria-labelledby="headingOne"
+                                                             data-parent="#accordion">
+                                                            <div class="card-block">
+
+
+
+                                                                <div class="row p-xl-1">
+                                                                    <div class="col-3">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        Citizen Type
+                                                                    </div>
+
+                                                                    <div class="col-3">
+                                                                        <div class="btn-group" data-toggle="buttons">
+                                                                             
+                                                                            <label ng-class="TaxSectionVIAotherModel.citizenType==0 ? 'btn btn-secondary active' : 'btn btn-secondary' ">
+                                                                                <input type="radio" name="TaxSectionVIAotherModel.citizenType"
+                                                                                       ng-model="TaxSectionVIAotherModel.citizenType"
+                                                                                       value="0">
+
+                                                                                Non-Senior Citizens
+
+
+                                                                            </label>
+                                                                            <label ng-class="TaxSectionVIAotherModel.citizenType==1 ? 'btn btn-secondary active' : 'btn btn-secondary' ">
+                                                                                <input type="radio" name="TaxSectionVIAotherModel.citizenType"
+                                                                                       ng-model="TaxSectionVIAotherModel.citizenType"
+                                                                                       value="1">
+                                                                                Senior Citizens
+                                                                            </label>
+
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row p-xl-1">
+
+                                                                    <div class="col-3">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        Amount
+                                                                    </div>
+
+                                                                    <div class="col-3">
+                                                                        <input type="number" name="TaxSec80List" ng-model="TaxSectionVIAotherModel.amount" class="defaultTextBox">
+                                                                    </div>
+
+                                                                </div>
+                                                                
+
+                                                                <div class="row p-xl-1">
+
+                                                                    <div class="col-3">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        Remarks
+                                                                    </div>
+
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="TaxSec80List" ng-model="TaxSectionVIAotherModel.remarks" class="defaultTextBox">
+
+                                                                    </div>
+                                                                </div>
+
+
+
+
+
+                                                            </div> <!-- card block-->
+                                                        </div> <!-- collapse-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- source-preview-wrapper end here-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="tab-pane fade" id="houseRent-images-tab-pane" role="tabpanel"
+                         aria-labelledby="houseRent-images-tab">
+
+                        <div class="card p-6" ng-if="Regime=='Old_Tax_Regime'">
+
+
+                            <div class="row p-xl-1 div-border bg-grey">
+                                <div class="col-6">
+                                    House Rent
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="row p-xl-1 div-border ">
+
+                                <div class="col-9">YEARLY RENT PAID TO LANDLORD</div>
+                                <div class="col-3">
+                                    <input type="text" name="RentPaid" ng-model="formBList.RentPaid" class="defaultTextBox" >
+                                </div>
+                                <div class="col-12">
+
+                                    <div class="source-preview-wrapper " ng-repeat="FormBRentModel in formBRentList">
+                                        <div class="preview">
+                                            <div class="preview-elements">
+                                                <div id="accordion" role="tablist">
+                                                    <div class="card">
+
+                                                        <div class="card-header bg-grey-200" role="tab" id="headingOne">
+                                                            <a data-toggle="collapse" href="#collapseRent{{FormBRentModel.rentID}}"
+                                                               aria-expanded="true"
+                                                               aria-controls="collapseOne">
+                                                                <div class="col-6">RENT DETAILS</div>
+                                                                <div class="col-3"></div>
+                                                                <div class="col-3">
+
+                                                                </div>
+                                                            </a>
+                                                        </div>
+
+                                                        <div id="collapseRent{{FormBRentModel.rentID}}" class="collapse" role="tabpanel"
+                                                             aria-labelledby="headingOne"
+                                                             data-parent="#accordion">
+                                                            <div class="card-block">
+
+
+                                                                <div class="row p-xl-1 div-border">
+
+                                                                    <div class="col-3">
+                                                                        Landlord 1 Name
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="formBRentList" ng-model="FormBRentModel.landlordName" class="defaultTextBox col-md-12">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        Landlord 2 Name
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="formBRentList" ng-model="FormBRentModel.landlordName2" class="defaultTextBox col-md-12">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+
+                                                                    <div class="col-3">
+                                                                        Landlord 1 PAN
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="formBRentList" ng-model="FormBRentModel.landlordPAN" class="defaultTextBox col-md-6">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        Landlord 2 PAN
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="formBRentList" ng-model="FormBRentModel.landlordPAN2" class="defaultTextBox col-md-6">
+
+                                                                        <input type="hidden" name="formBRentList" ng-model="FormBRentModel.employeeID">
+                                                                        <input type="hidden" name="formBRentList" ng-model="FormBRentModel.rentID">
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+
+                                                                    <div class="col-3">
+                                                                        Landlord 1 Address
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="formBRentList" ng-model="FormBRentModel.landlordAddress" class="defaultTextBox col-md-12">
+
+                                                                    </div>
+
+                                                                    <div class="col-3">
+                                                                        Landlord 2 Address
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="formBRentList" ng-model="FormBRentModel.landlordAddress2" class="defaultTextBox col-md-12">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+
+                                                                    <div class="col-3">
+                                                                        Address of the house 1 occupied by employee
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="formBRentList" ng-model="FormBRentModel.rentedHouseAddress" class="defaultTextBox col-md-12">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        Address of the house 2 occupied by employee
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="text" name="formBRentList" ng-model="FormBRentModel.rentedHouseAddress2" class="defaultTextBox col-md-12">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row bg-gray-light">
+                                                                    <div class="col-12"> &nbsp;</div>
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border bg-grey-200">
+
+                                                                    <div class="col-4">
+                                                                        SNo
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        Month
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        Rent Amount Declared
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border ">
+
+                                                                    <div class="col-4">
+                                                                        1
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        JAN
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month1" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        2
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        FEB
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month2" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        3
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        MAR
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month3" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        4
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        APR
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month4" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        5
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        MAY
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month5" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        6
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        JUN
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month6" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        7
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        JUL
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month7" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        8
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        AUG
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month8" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        9
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        SEP
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month9" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        10
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        OCT
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month10" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        11
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        NOV
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month11" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-4">
+                                                                        12
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        DEC
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="formBRentList" ng-model="FormBRentModel.month12" class="form-control col-md-6">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row p-xl-1 ">
+                                                                    <div class="col-4">
+
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                            </div> <!-- card block-->
+                                                        </div> <!-- collapse-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- source-preview-wrapper end here-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="tab-pane fade" id="HouseProp-images-tab-pane" role="tabpanel"
+                         aria-labelledby="HouseProp-images-tab">
+
+                        <div class="card p-6" ng-if="Regime=='Old_Tax_Regime'">
+
+
+                            <div class="row p-xl-1 div-border bg-grey">
+                                <div class="col-6">
+                                    INCOME/LOSS FROM HOUSE PROPERTY
+                                </div>
+                                <div class="col-3">
+
+
+
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="row p-xl-1 div-border ">
+
+                                <div class="col-9"></div>
+                                <div class="col-3">
+                                </div>
+                                <div class="col-12">
+
+                                    <div class="source-preview-wrapper" ng-repeat="HousePropertyModel in HousePropertyList">
+                                        <!-- ng-repeat="HousePropertyModel in HousePropertyList"-->
+                                        <div class="preview">
+                                            <div class="preview-elements">
+                                                <div id="accordion" role="tablist">
+                                                    <div class="card">
+                                                        <a data-toggle="collapse" href="#collapseHouse{{HousePropertyModel.houseProperty}}"
+                                                           aria-expanded="true"
+                                                           aria-controls="collapseOne">
+                                                            <div class="card-header" role="tab" id="headingOne">
+                                                                <div class="col-6">House Property </div>
+                                                                <div class="col-3"></div>
+                                                                <div class="col-3">
+
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <div id="collapseHouse{{HousePropertyModel.houseProperty}}" class="collapse" role="tabpanel"
+                                                             aria-labelledby="headingOne"
+                                                             data-parent="#accordion">
+                                                            <div class="card-block">
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        Declaration Details
+                                                                    </div>
+                                                                     
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Address of the property
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <textarea name="HousePropertyList" ng-model="HousePropertyModel.propertyAddress" class="form-control" rows="4"></textarea>
+
+ 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Purpose of Loan taken
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="text" name="HousePropertyList" ng-model="HousePropertyModel.loanPurpose" class="defaultTextBox">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        House Loan taken after April 1999 and construction completed within 3 Years
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="text" name="HousePropertyList" ng-model="HousePropertyModel.houseLoan1999" class="defaultTextBox">
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Is House Self Occupied?
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                       
+
+                                                                        <div class="btn-group" data-toggle="buttons">
+                                                                            <label ng-class="HousePropertyModel.selfOccupied==0 ? 'btn btn-secondary active' : 'btn btn-secondary' ">
+                                                                                <input type="radio" name="HousePropertyList" ng-model="HousePropertyModel.selfOccupied" value="0"/> 
+                                                                                NO
+
+                                                                            </label> 
+
+
+                                                                            <label ng-class="HousePropertyModel.selfOccupied==1 ? 'btn btn-secondary active' : 'btn btn-secondary' ">
+                                                                                <input type="radio" name="HousePropertyList" ng-model="HousePropertyModel.selfOccupied" value="1" />  YES
+                                                                            </label>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                     
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Name of the Tenant
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="text" name="HousePropertyList" ng-model="HousePropertyModel.lenderName" class="defaultTextBox">
+                                                                    </div>
+                                                                     
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Address of the Tenant
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <textarea  name="HousePropertyList" ng-model="HousePropertyModel.lenderAddress" class="form-control" rows="4" ></textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Tenant PAN
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="text" name="HousePropertyList" ng-model="HousePropertyModel.lenderPAN" class="defaultTextBox">
+                                                                    </div>
+                                                                   
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        House Occupied From (Year)
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="HousePropertyList" ng-model="HousePropertyModel.periodFrom" class="defaultTextBox">
+                                                                    </div>
+                                                                   
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        House Occupied TO (Year)
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="HousePropertyList" ng-model="HousePropertyModel.periodTo" class="defaultTextBox">
+
+                                                                    </div>
+                                                                      
+                                                                </div>
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        House Rent received per annum
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="HousePropertyList" ng-model="HousePropertyModel.rentReceived" class="defaultTextBox">
+
+                                                                    </div>
+                                                                    
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Property Tax
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="HousePropertyList" ng-model="HousePropertyModel.propertyTax" class="defaultTextBox">
+
+                                                                    </div>
+                                                                     
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Water Tax
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="HousePropertyList" ng-model="HousePropertyModel.waterTax" class="defaultTextBox">
+                                                                    </div>
+                                                                    
+                                                                </div>
+
+                                                                <div class="row p-xl-1 div-border">
+                                                                    <div class="col-6">
+                                                                        Income/Loss on house property
+                                                                    </div>
+                                                                    <div class="col-2">
+
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <input type="number" name="HousePropertyList" ng-model="HousePropertyModel.total_IncomeLoss" ng-value="HousePropertyModel.RentReceived +HousePropertyModel.PropertyTax+HousePropertyModel.WaterTax" class="defaultTextBox">
+
+                                                                    </div>
+                                                                    
+                                                                </div>
+
+
+
+                                                            </div> <!-- card block-->
+                                                        </div> <!-- collapse-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- source-preview-wrapper end here-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-1" ng-if="formBList != 'null' && formBList.formID!=0">
+                            <div class="payment-adress">
+                                
+                                <button type="submit" class="btn btn-primary waves-effect waves-light" ng-click="SaveFormB(formBList,HousePropertyList,formBRentList,TaxSec80List,TaxSecVIAOtherList)">Update</button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2" ng-if="formBList.formID==0">
+                            <div class="payment-adress">
+                              
+                                <button type="submit" class="btn btn-primary waves-effect waves-light" ng-click="SaveFormB(formBList,HousePropertyList,formBRentList,TaxSec80List,TaxSecVIAOtherList)">Save</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- / CONTENT -->
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,114 @@
+﻿@model ArimagnusPayrollServ.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<div id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 call-action call-action-boxed call-action-style1 no-descripton clearfix">
+                <p class="text-info"><strong>Register a new membership</strong></p>
+                <br />
+                @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post ))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div id="contact-form" class="contatct-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                             &nbsp;
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.Occupation, new { @class = "form-control", placeholder = "Occupation" })
+                                @Html.ValidationMessageFor(m => m.Occupation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", placeholder = "DOB" })
+                                @Html.ValidationMessageFor(m => m.DOB, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.Gender, new { @class = "form-control", placeholder = "Gender" })
+                                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", placeholder = "Address" })
+                                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Phone" })
+                                @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.SecondaryPhone, new { @class = "form-control", placeholder = "Secondary Phone" })
+                                @Html.ValidationMessageFor(m => m.SecondaryPhone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <div class="checkbox icheck">
+                                    <label>
+                                        <input type="checkbox"> I agree to the <a href="#">terms</a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-xs-4">
+                                <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+                }
+
+                <div class="social-auth-links text-center">
+
+                </div>
+                <br />
+                <a href="/Account/Login" class="text-center">I already have a membership</a>
+            </div>
+
+            <!-- /.form-box -->
+        </div>
+
+        <!-- /.register-box -->
+</div>
+</div>

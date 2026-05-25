@@ -1,0 +1,198 @@
+﻿@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/lib/js/popper.js/index.js"></script>
+ 
+    <script src="~/lib/appJS/ProfileSalaryVal.js"></script>
+
+
+
+}
+
+
+
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="e-commerce-products" class="page-layout carded full-width">
+
+            <div class="top-bg bg-primary"></div>
+
+            <!-- CONTENT -->
+            <div class="page-content" ng-app="ProfileSalaryApp">
+
+                <!-- HEADER -->
+                <div class="header bg-primary text-auto row no-gutters align-items-center justify-content-between">
+
+                    <!-- APP TITLE -->
+                    <div class="col-12 col-sm">
+
+                        <div class="logo row no-gutters align-items-start">
+                            <div class="logo-icon mr-3 mt-1">
+                                <i class="icon-cube-outline s-6"></i>
+                            </div>
+                            <div class="logo-text">
+                                <div class="h4">Profile Salary Setup</div>
+                                <div class=""></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- / APP TITLE -->
+
+
+                    <div class="col-auto">
+                        <a href="/ProfileSalary/AddProfileSalaryDetails" class="btn btn-secondary">Add New Salary</a>
+                    </div>
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT -->
+                <div class="page-content" ng-controller="ProfileSalaryController" ng-init="LoadProfileSalaryDetails()">
+
+
+                  
+
+                     
+                        <div class="page-content-card">
+
+                       
+                                <span class="input-icon">
+                                    <i class="icon icon-account-search s-4 bigger-120"></i>
+                                    <input type="text" ng-model="searchEmployeeID" placeholder="Search by any field" class="input-small " />
+                                    
+
+                                </span>
+                             
+
+                            <table id="formSummary-table" class="table dataTable">
+                            
+                                <thead>
+                                        
+                                    <tr>
+
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Employee ID</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Employee Name</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Year</span>
+                                            </div>
+                                        </th>
+
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">CTC</span>
+                                            </div>
+                                        </th>
+
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Variable Pay</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Others</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Custom Ref  1</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Custom Ref  2</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Status</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Effective Date</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="table-header">
+                                                <span class="column-title">Action</span>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <tr ng-repeat="ProfileSalaryModel in profileSalaryList | filter : searchEmployeeID" tableload>
+                                        <td>
+                                            {{ProfileSalaryModel.employeeID}}
+                                            <input type="hidden" name="ProfileSalaryModel" ng-model="ProfileSalaryModel.salaryProfileID">
+                                        </td>
+                                        <td>{{ProfileSalaryModel.empName}}</td>
+
+                                        <td>{{ProfileSalaryModel.year}}</td>
+                                        <td> {{ProfileSalaryModel.ctc}}</td>
+                                        <td>{{ProfileSalaryModel.variablePay}}</td>
+                                        <td> {{ProfileSalaryModel.others}}</td>
+                                        <td>  {{ProfileSalaryModel.customString1}} </td>
+
+                                        <td>
+                                               {{ProfileSalaryModel.customString2}} 
+                                        </td>  
+                                        <td class="date">
+
+                                            <span class="badge badge-info" ng-if="ProfileSalaryModel.status==3"> InActive</span>
+                                            <span class="badge badge-warning" ng-if="ProfileSalaryModel.status!=3"> Active</span>
+                                             
+
+                                        </td>
+
+                                        <td>
+                                            <span class="badge badge-info"> {{ProfileSalaryModel.effectiveDate}}</span>
+                                        </td> 
+
+                                        <td>
+                                            <a href="EditProfileSalarySetup/{{ProfileSalaryModel.salaryProfileID}}">
+                                                <i class="icon icon-pencil s-4"></i>
+                                            </a>
+                                            <a ng-if="FlexiBenefitProofModel.status!=4" href="" ng-click="DeleteMasterGroupSetup(ProfileSalaryModel)">
+                                                <i class="icon icon-delete s-4"></i>
+                                            </a>
+
+
+                                            
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+
+                           
+
+
+                        </div>
+
+                        <!-- / SUB CONTENT -->
+                    
+                </div>
+                <!-- / CONTENT -->
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

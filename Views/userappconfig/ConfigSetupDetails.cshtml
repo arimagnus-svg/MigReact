@@ -1,0 +1,195 @@
+﻿@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+
+    <script src="~/lib/appJS/ConfigSetupVal.js"></script>
+     
+}
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="e-commerce-products" class="page-layout carded full-width">
+
+            <div class="top-bg bg-primary"></div>
+
+            <!-- CONTENT -->
+            <div class="page-content" ng-app="UserAppConfig">
+
+                <!-- HEADER -->
+                <div class="header bg-primary text-auto row no-gutters align-items-center justify-content-between">
+
+                    <!-- APP TITLE -->
+                    <div class="col-12 col-sm">
+
+                        <div class="logo row no-gutters align-items-start">
+                            <div class="logo-icon mr-3 mt-1">
+                                <i class="icon-cube-outline s-6"></i>
+                            </div>
+                            <div class="logo-text">
+                                <div class="h4">Application Paramater Setup</div>
+                                <div class=""></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- / APP TITLE -->
+
+
+                    <div class="col-auto">
+                        <a href="/UserAppConfig/NewConfigSetup" class="btn btn-secondary">Add New Parameter</a>
+                    </div>
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT -->
+                <div class="page-content" ng-controller="UserAppConfigController" ng-init="LoadConfigSetupDetails()" />
+
+               
+                <div class="page-content-card">
+                     
+
+
+
+                    <span class="input-icon">
+                        <i class="icon icon-account-search s-4 bigger-120"></i>
+                        <input type="text" ng-model="searchEmployeeID" placeholder="Search by any field" class="input-small " />
+
+
+                    </span>
+
+                    <table id="formSummary-table" class="table dataTable">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Param Type</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Param Name</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Param Value</span>
+                                    </div>
+                                </th> 
+                                 
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Custom Ref 1</span>
+                                    </div>
+                                </th>
+
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Custom Ref 2</span>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Custom Ref 3</span>
+                                    </div>
+                                </th>
+
+
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Custom Ref 4</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Status</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Effective Date</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <span class="column-title">Action</span>
+                                    </div>
+                                </th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr ng-repeat="UserConfigModel in userConfigList  | filter : searchEmployeeID" tableload>
+                                <td>
+                                    {{UserConfigModel.paramType}}
+                                </td>
+                                <td> {{UserConfigModel.paramName}}</td>
+
+
+                                <td>
+                                    {{UserConfigModel.paramValue}}
+                                </td>
+                                <td>
+                                    {{UserConfigModel.customBoolean1}}
+                                </td>
+                                <td>
+                                    {{UserConfigModel.customBoolean2}}
+                                </td>
+                                <td>
+                                    {{UserConfigModel.customString1}}
+                                </td>
+                                <td>
+                                    {{UserConfigModel.customString2}}
+                                </td>
+                                <td>
+                                    <span class="badge badge-info" ng-if="UserConfigModel.status==1"> Submitted</span>
+                                    <span class="badge badge-info" ng-if="UserConfigModel.status==2"> Updated</span>
+
+                                    <span class="badge badge-warning" ng-if="UserConfigModel.status==3"> Deleted</span>
+                                </td>
+                                <td>
+                                    {{UserConfigModel.effectiveDate}}
+                                </td>  
+
+                                <td>
+
+
+                                    <a data-ng-href="@Url.Action("LoadConfigSetupEdit", "UserAppConfig")/{{UserConfigModel.paramID}}"> <i class="icon icon-pencil s-4"></i>  </a>
+
+
+                                    <button type="button" class="btn btn-icon" aria-label="Product details" ng-click="DeleteConfigSetup(UserConfigModel)">
+                                        <i class="icon icon-delete s-4"></i>
+                                    </button>
+
+
+                                </td>
+
+
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+
+
+                       
+                         
+                    
+
+                    <!-- / SUB CONTENT -->
+                </div>
+            </div>
+            <!-- / CONTENT -->
+        </div>
+
+    </div>
+
+</div>

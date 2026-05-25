@@ -1,0 +1,61 @@
+﻿@using ArimagnusPayrollServ.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+
+<!-- Start Content -->
+<div id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                </div>
+            <div class="col-md-4 call-action call-action-boxed call-action-style1 no-descripton clearfix">
+                <p class="text-info"><strong>Sign in to start your session</strong></p>
+                <br />
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post ))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group has-feedback">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="form-group has-feedback">
+                        <button type="submit" class="btn-system btn-small border-btn">Sign In</button>
+
+                    </div>
+
+                    <div class="form-group has-feedback text-right">
+                        <a href="/Account/Register" class="btn btn-block btn-social btn-facebook btn-flat text-right">
+                            <i class="fa fa-user"></i>Register a new membership
+                        </a>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <a href="/Account/ForgotPassword" class="btn btn-block btn-social btn-google btn-flat">
+                            <i class="fa fa-lock"></i>  I forgot my password
+                        </a>
+                    </div>
+                        <!-- /.col -->
+                 }
+                 
+
+
+
+            </div>
+            <!-- /.login-box-body -->
+        </div>
+        <!-- /.login-box -->
+</div>
+</div>

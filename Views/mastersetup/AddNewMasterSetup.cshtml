@@ -1,0 +1,222 @@
+﻿@section scripts{
+    <script src="~/lib/angular.js"></script>
+    <script src="~/lib/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/lib/js/popper.js/index.js"></script>
+
+    <script src="~/lib/appJS/MasterGroupSetupChange.js"></script>
+
+    <script src="~/lib/angular-drag-and-drop-lists.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/css/simple.css" />
+
+
+}
+
+<div class="content-wrapper">
+
+    <div class="content">
+        <div id="e-commerce-products" class="page-layout carded full-width">
+
+            <div class="top-bg bg-primary"></div>
+
+            <!-- CONTENT -->
+            <div class="page-content" ng-app="MasterGroupSetupApp">
+
+                <!-- HEADER -->
+                <div class="header bg-primary text-auto row no-gutters align-items-center justify-content-between">
+
+                    <!-- APP TITLE -->
+                    <div class="col-12 col-sm">
+
+                        <div class="logo row no-gutters align-items-start">
+                            <div class="logo-icon mr-3 mt-1">
+                                <i class="icon-cube-outline s-6"></i>
+                            </div>
+                            <div class="logo-text">
+                                <div class="h4">Add Master Group Setup</div>
+                                <div class=""></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- / APP TITLE -->
+
+
+
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT -->
+                <div class="page-content" ng-controller="MasterGroupSetupController" ng-init="LoadMasterSetupData()">
+
+
+                    <div class="tab-content">
+                        <div class="row tab-pane fade show active">
+                            <div class="card p-6">
+                                <div class="row p-xl-1" ng-if="msg!=''">
+
+                                    <div class="preview">
+                                        <div class="preview-elements">
+                                            <div class="alert alert-warning alert-dismissible fade show"
+                                                 role="alert">
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>{{msg}}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <form>
+                                    <div class="input-group mb-8">
+                                        <div class="col-6">
+                                            <div class="form-group ">
+                                                <label>Group Name </label>
+                                                <input type="text" class="form-control col-md-6" name="MasterGroupModel" ng-model="MasterGroupModel.groupName">
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Effective Date</label>
+                                                <input type="date" class="form-control col-md-6" name="MasterGroupModel" ng-model="MasterGroupModel.effectiveDate">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-8">
+                                        <div class="col-md-9">
+
+                                            <p class="h4"> Component List</p>
+                                           
+                                                <div class="simpleDemo row" >
+                                                   
+                                                    <div class="col-md-12">
+                                                        <div class="row simpleDemo" >
+
+                                                            <div ng-repeat="(listName, list) in models.lists" class="col-md-6 dndPlaceholder" >
+                                                                <div class="panel panel-info">
+                                                                    <div class="panel-heading " style="background-color:#a4e3e7">
+                                                                        <h6 class="panel-title"> {{listName}}</h6>
+                                                                    </div>
+                                                                    <div class="panel-body">
+
+                                                                        <ul dnd-list="list">
+
+                                                                            <li ng-repeat="item in list"
+                                                                                dnd-draggable="item"
+                                                                                dnd-moved="list.splice($index, 1)"
+                                                                                dnd-effect-allowed="move"
+                                                                                dnd-selected="models.selected = item"
+                                                                                ng-class="{'selected': models.selected === item}">
+                                                                                {{item.label}}
+                                                                            </li>
+                                                                        </ul>
+
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                </div>
+
+                                           
+
+
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group ">
+
+
+                                                <div class="logo-icon mr-3 mt-1">
+                                                    <i class="icon-information s-6"> </i>
+                                                </div>
+                                                <div class="logo-text">
+                                                    <div class="h6">Drag the required component from avaiable list to Select list</div>
+                                                    <div class=""></div>
+                                                </div>
+
+                                                
+                                                
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-8">
+                                        <div class="col-6">
+                                            <div class="form-group ">
+                                                <label>Custom Integer1</label>
+                                                <input type="text" class="form-control col-md-6" name="MasterGroupModel" ng-model="MasterGroupModel.customInteger1">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group ">
+                                                <label>Custom Integer2</label>
+                                                <input type="text" class="form-control col-md-6" name="MasterGroupModel" ng-model="MasterGroupModel.customInteger2">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-8">
+                                        <div class="col-6">
+                                            <div class="form-group ">
+                                                <label>Custom String1</label>
+                                                <input type="text" class="form-control col-md-6" name="MasterGroupModel" ng-model="MasterGroupModel.customString1">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Custom String2</label>
+                                                <input type="text" class="form-control col-md-6" name="MasterGroupModel" ng-model="MasterGroupModel.customString2">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-8">
+                                        <div class="col-5">
+
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="form-group">
+
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light" ng-click="SaveMasterGroupSetup(MasterGroupModel, models)">Submit</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+
+
+                        </div>
+
+                        <!-- / SUB CONTENT -->
+                    </div>
+                </div>
+                <!-- / CONTENT -->
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
